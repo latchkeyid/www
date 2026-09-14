@@ -1,5 +1,9 @@
 # Rollout
 
+The pattern every product is held to — loom API on Cloud Run, console
+and site on Cloudflare Pages — and the audit of who fits it is
+`PLATFORM.md`; this file is the site rollout.
+
 One site at a time, each a PR on a `www` branch in the product's own
 repo. Latchkey first because its site is the worst and its docs are the
 most read; then the three new services, which have no site at all and

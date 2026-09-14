@@ -2,9 +2,9 @@
 
 Repo: `purserid/purser` — the service repo (Go binary, `console/`,
 `infra/`). There is no site today. The domain's zone is in Cloudflare
-and managed by `infra/cloudflare` (applied 2026-09-14: the zone,
-null-mail SPF/DMARC, `app.`/`hooks.` behind `dns_enabled`); the apex
-and `www.` are unmapped. The product is not built yet — the site
+and managed by `infra/cloudflare` (the zone, null-mail SPF/DMARC,
+`api.`/`hooks.` behind `dns_enabled`, and the Pages projects for the
+console and this site). The product is not built yet — the site
 describes what `DESIGN.md` says it is, in the future-honest tense the
 README uses ("Purser is …", never "available now").
 
@@ -24,39 +24,12 @@ README uses ("Purser is …", never "available now").
   house default; **omit it and the primary Console button until the
   console is deployed** (`cta: null` and no `secondary` in `site.ts` —
   an empty nav right side is fine).
-- `infra/cloudflare/purser.tf` gains, on the latchkey shape:
-  ```hcl
-  resource "cloudflare_pages_project" "www" {
-    account_id        = var.account_id
-    name              = "purser-www"
-    production_branch = "main"
-    lifecycle { ignore_changes = [build_config, deployment_configs] }
-  }
-  resource "cloudflare_pages_domain" "www" {
-    for_each     = toset(["purser.id", "www.purser.id"])
-    account_id   = var.account_id
-    project_name = cloudflare_pages_project.www.name
-    name         = each.key
-  }
-  # Apex CNAME works via Cloudflare's flattening.
-  resource "cloudflare_dns_record" "www_site" {
-    for_each = toset(["purser.id", "www.purser.id"])
-    zone_id  = cloudflare_zone.this.id
-    name     = each.key
-    type     = "CNAME"
-    content  = "purser-www.pages.dev"
-    proxied  = true
-    ttl      = 1
-  }
-  ```
-  The token in `TF_VAR_cloudflare_api_token` needs Account > Cloudflare
-  Pages > Edit as well as DNS. Leave the apply to Chris (local state);
-  include the plan output in the PR.
-- `.github/workflows/www.yml`: on push to main with `paths: [www/**]`
-  (and `workflow_dispatch`), `npm ci && npm run build` in `www/`, then
-  `npx wrangler pages deploy dist --project-name purser-www --branch=main`
-  with `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` repo secrets
-  (values from `latchkeyid/ui`). Keep `ci.yml` and `deploy.yml` as
+- **Cloudflare is already done** (2026-09-15): `infra/cloudflare/pages.tf`
+  holds the `purser-www` Pages project, the apex + `www.` domains and
+  the proxied CNAMEs (and the console's). Apply is Chris's (local
+  state); nothing for the adopter to add there.
+- `.github/workflows/www.yml`: copy `console.yml` (already in the repo)
+  with `console/` → `www/` and the project `purser-www`; same secrets. Keep `ci.yml` and `deploy.yml` as
   they are; add `www/` to `ci.yml`'s job as a build step so a broken
   site fails PR CI.
 - `.gitignore` already ignores `/console/node_modules` etc.; add

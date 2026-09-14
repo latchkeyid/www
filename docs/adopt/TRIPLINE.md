@@ -1,5 +1,13 @@
 # Adopt in tripline's www
 
+**First, the console moves to Pages** (`PLATFORM.md`): tripline's
+console is embedded in the binary today, which is the one thing in the
+estate that does not fit. Do that PR before this one — the three
+scaffolded services show the exact shape (`cmd/<name>/main.go`'s
+`cors`, `console/src/config.ts`'s `apiBase`, `infra/cloudflare/pages.tf`,
+`console.yml`) — so `app.tripline.id` is a Pages project and
+`api.tripline.id` is the Cloud Run mapping before the site takes the apex.
+
 Repo: `triplineid/tripline` (Go binary, `console/`, `infra/`). No site
 today. `tripline.id`'s zone is Terraform in `infra/cloudflare`, but the
 **apex A and `www` CNAME are Namecheap parking records the zone was
