@@ -49,7 +49,7 @@ const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@type": "Orga
 // the light-mode primaries so a single stylesheet works for every site.
 const dots = house.map((h) => `--house-${h.accent}: ${{
   latchkey: "#6E56CF", tripline: "#5B5BD6", runsheet: "#10A594", wardroom: "#0A7CA6", purser: "#688003", foghorn: "#BF308F",
-  grapevine: "#007A46", inflow: "#007C83", payntally: "#009586", ten99: "#0E9A3F", optrader: "#E36927", thirtysixzero: "#3E6596", projectmesh: "#2563EB",
+  thirtysixzero: "#3E6596", projectmesh: "#2563EB",
 }[h.accent] ?? "currentColor"}`).join(";");
 ---
 <!doctype html>

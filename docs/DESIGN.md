@@ -31,11 +31,9 @@ Consumed as a git dependency shipping Astro source, like the shell.
   alpha; cards lift by border and a soft two-layer shadow.
 - **Accent**: `--primary`, `--primary-foreground`, `--accent-2` (the
   second gradient stop), `--accent-soft`, `--ring`. The six console
-  products' files are the shell's, verbatim. The others (grapevine,
-  inflow, payntally, ten99, optrader, thirtysixzero, projectmesh) are
-  defined here from their sites' brand values where one exists; the
-  header of each file says its source, and three are marked
-  PROVISIONAL.
+  products' files are the shell's, verbatim. Project Mesh's is from its
+  site's brand variables (blue → cyan); thirtysixzero has no brand
+  colour on record and its file (steel) is marked PROVISIONAL.
 - **Type**: Geist body at 17px/1.65 (`text-base`), Geist Mono for
   eyebrows and code, **Instrument Serif** for display — `display-1`
   (hero, fluid 44–84px, tracking −0.02em), `display-2` (section

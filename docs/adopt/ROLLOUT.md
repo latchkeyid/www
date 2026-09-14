@@ -6,6 +6,9 @@ most read; then the three new services, which have no site at all and
 whose `infra/cloudflare` stacks are already in Terraform; then the
 products with sites that work today.
 
+**Not part of this**: grapevine, inflow, Pay N Tally, 1099-W9 and
+optrader keep their own sites and are not in `house.ts`.
+
 | # | Product | Site today | Where the new site lives | Accent | Status |
 | --- | --- | --- | --- | --- | --- |
 | 1 | latchkey | one hand-written HTML file + 2 docs pages, brass, in `latchkeyid/ui/www` | `latchkeyid/ui/www` (replace contents) | shell's, verbatim | ready — `LATCHKEY.md` |
@@ -14,9 +17,8 @@ products with sites that work today.
 | 4 | wardroom | none | `wardroomid/wardroom/www` | shell's | ready — `WARDROOM.md` |
 | 5 | tripline | none; apex parked at Namecheap | `triplineid/tripline/www` | shell's | ready — `TRIPLINE.md` |
 | 6 | runsheet | Astro on Cloudflare, slate/indigo hand-rolled, in `runsheet/website` | `runsheet/website` (swap the layout) | shell's | ready — `RUNSHEET.md` |
-| 7 | grapevine | Next.js at gvn.au with real content | `GrapevineNetwork/website` | from the site's brand | later — bigger port |
-| 8 | Pay N Tally, 1099-W9, inflow | Astro / Vite+React / — | their repos | payntally, ten99, inflow (provisional) | later |
-| 9 | optrader, thirtysixzero, Project Mesh | Next.js app / Next.js / raw HTML | their repos | provisional accents | later — confirm accents first |
+| 7 | Project Mesh | raw HTML + Tailwind CDN on the `mesh-marketing` Pages project, dark blue/cyan | `projectmesh-io/mesh-marketing` (replace contents) | from the site's variables | ready — `PROJECTMESH.md` |
+| 8 | thirtysixzero | none — the Next.js app on Vercel is at the apex | `thirtysixzero/thirtysixzero/www` | provisional (steel) — confirm | ready — `THIRTYSIXZERO.md` |
 
 Status moves to "shipped <date> <sha>" when the PR merges and the Pages
 deploy is live; note the live URL.

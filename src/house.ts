@@ -21,13 +21,8 @@ export const house: Product[] = [
   { id: "wardroom", name: "Wardroom", line: "The team hub: every tool's feed in one place.", url: "https://wardroom.id", accent: "wardroom", console: "https://app.wardroom.id" },
   { id: "purser", name: "Purser", line: "Support, contacts and leads for your products.", url: "https://purser.id", accent: "purser", console: "https://app.purser.id" },
   { id: "foghorn", name: "Foghorn", line: "Campaigns, email and attribution, loud and clear.", url: "https://foghorn.id", accent: "foghorn", console: "https://app.foghorn.id" },
-  { id: "grapevine", name: "Grapevine", line: "Local hiring for hospitality and retail.", url: "https://gvn.au", accent: "grapevine", console: "https://app.gvn.au" },
-  { id: "inflow", name: "inflow", line: "Filing and payments infrastructure for US businesses.", url: "https://myinflow.com", accent: "inflow" },
-  { id: "payntally", name: "Pay N Tally", line: "Contractor payments with the 1099s done.", url: "https://www.payntally.com", accent: "payntally" },
-  { id: "ten99", name: "1099-W9", line: "1099 filing, W-9 collection, TIN matching.", url: "https://1099-w9.com", accent: "ten99" },
-  { id: "optrader", name: "optrader", line: "The marketplace for card traders.", url: "https://optrader.com.au", accent: "optrader" },
   { id: "thirtysixzero", name: "thirtysixzero", line: "Configuration items, connected to the tools that run your business.", url: "https://thirtysixzero.io", accent: "thirtysixzero" },
-  { id: "projectmesh", name: "Project Mesh", line: "Specs, work items and agents, machine-authenticated.", url: "https://projectmesh.io", accent: "projectmesh" },
+  { id: "projectmesh", name: "Project Mesh", line: "The control plane for your AI agent fleet.", url: "https://projectmesh.io", accent: "projectmesh", console: "https://app.projectmesh.io" },
 ];
 
 export function product(id: string): Product | undefined {

@@ -1,8 +1,8 @@
 import { expect, test, type Page } from "@playwright/test";
 
 // Every product's accent on the same page, light and dark, desktop and
-// phone: the proof that the shell is one design with thirteen skins.
-const themes = ["latchkey", "tripline", "runsheet", "wardroom", "purser", "foghorn", "grapevine", "inflow", "payntally", "ten99", "optrader", "thirtysixzero", "projectmesh"] as const;
+// phone: the proof that the shell is one design with eight skins.
+const themes = ["latchkey", "tripline", "runsheet", "wardroom", "purser", "foghorn", "projectmesh", "thirtysixzero"] as const;
 
 async function open(page: Page, path: string, theme: string, dark: boolean) {
   await page.emulateMedia({ reducedMotion: "reduce", colorScheme: dark ? "dark" : "light" });

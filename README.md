@@ -2,8 +2,7 @@
 
 One design and one set of Astro layouts for the product marketing sites
 — **latchkey**, **tripline**, **runsheet**, **wardroom**, **purser**,
-**foghorn**, **grapevine**, **inflow**, **Pay N Tally**, **1099-W9**,
-**optrader**, **thirtysixzero** and **Project Mesh**. The sibling of
+**foghorn**, **Project Mesh** and **thirtysixzero**. The sibling of
 [`@latchkey/shell`](https://github.com/latchkeyid/shell), which does the
 same for the consoles: the same mauve neutral, the same accent per
 product, so "Console" in the nav lands somewhere that looks like where
@@ -21,7 +20,7 @@ every product's accent on the same page is in `docs/screenshots/`.
 
 `docs/adopt/` is the handover: `COMMON.md` (the rules for any site),
 `ROLLOUT.md` (order and status — latchkey, then foghorn, purser,
-wardroom, tripline, runsheet), and one brief per site with what differs.
+wardroom, tripline, runsheet, Project Mesh, thirtysixzero), and one brief per site with what differs.
 
 ## Start a site
 
@@ -83,5 +82,5 @@ npm run sync-accents   # copy the six console accents from ../shell
 ```
 
 Screenshots are the review: `docs/screenshots/<product>-{light,dark}.png`
-for all thirteen, `latchkey-full.png` for the whole page, `docs-dark`,
+for all eight, `latchkey-full.png` for the whole page, `docs-dark`,
 `pricing-light`, `changelog-light`, `foghorn-phone`.
