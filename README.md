@@ -17,6 +17,12 @@ The design contract is [`docs/DESIGN.md`](docs/DESIGN.md); the evidence
 behind it is [`docs/research/trends.json`](docs/research/trends.json);
 every product's accent on the same page is in `docs/screenshots/`.
 
+## Rolling it out
+
+`docs/adopt/` is the handover: `COMMON.md` (the rules for any site),
+`ROLLOUT.md` (order and status — latchkey, then foghorn, purser,
+wardroom, tripline, runsheet), and one brief per site with what differs.
+
 ## Start a site
 
 ```sh

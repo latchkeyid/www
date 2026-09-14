@@ -11,7 +11,7 @@ interface Props {
   product: string;
   nav: { group: string; items: { title: string; href: string }[] }[];
   links?: { label: string; href: string }[];
-  cta?: { label: string; href: string };
+  cta?: { label: string; href: string } | null;
   /** Shown above the h1 in the eyebrow style. */
   section?: string;
   edit?: string;
