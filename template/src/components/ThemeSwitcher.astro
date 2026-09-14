@@ -1,0 +1,39 @@
+---
+/**
+ * PLAYGROUND ONLY — swaps the accent stylesheet at runtime so one build
+ * shows every product (?theme=purser). A real site imports one accent in
+ * global.css and deletes this. The `?url` imports make Vite emit each
+ * accent file as its own asset.
+ */
+import { house } from "@latchkey/www";
+// Only the accent files: base.css and fonts.css use @apply and must not be
+// processed as standalone assets outside the site's Tailwind context.
+const accents = import.meta.glob(["../../node_modules/@latchkey/www/src/theme/*.css", "!**/base.css", "!**/fonts.css"], { query: "?url", import: "default", eager: true }) as Record<string, string>;
+const options = house.map((p) => ({ id: p.accent, name: p.name, url: accents[`../../node_modules/@latchkey/www/src/theme/${p.accent}.css`] })).filter((o) => o.url);
+---
+<link id="accent-css" rel="stylesheet" href="" />
+<div data-theme-switcher class="fixed right-4 bottom-4 z-50 flex items-center gap-2 rounded-lg border bg-popover/90 p-2 text-sm shadow-card backdrop-blur-sm">
+  <label class="eyebrow px-1 text-muted-foreground" for="accent-pick">Theme</label>
+  <select id="accent-pick" class="h-8 rounded-md border bg-card px-2 text-sm">
+    {options.map((o) => <option value={o.id} data-url={o.url}>{o.name}</option>)}
+  </select>
+</div>
+<script>
+  const link = document.getElementById("accent-css") as HTMLLinkElement;
+  const pick = document.getElementById("accent-pick") as HTMLSelectElement;
+  const q = new URLSearchParams(location.search);
+  const apply = (id: string) => {
+    const opt = [...pick.options].find((o) => o.value === id) ?? pick.options[0];
+    pick.value = opt.value;
+    link.href = opt.dataset.url!;
+    document.head.appendChild(link); // after the site's own stylesheet in cascade order
+  };
+  apply(q.get("theme") ?? "latchkey");
+  pick.addEventListener("change", () => {
+    apply(pick.value);
+    const u = new URL(location.href);
+    u.searchParams.set("theme", pick.value);
+    history.replaceState(null, "", u);
+  });
+  if (q.get("controls") === "0") document.querySelector("[data-theme-switcher]")?.remove();
+</script>

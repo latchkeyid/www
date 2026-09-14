@@ -1,0 +1,17 @@
+/* thirtysixzero accent: steel. Import after base.css.
+   Source: PROVISIONAL — the current site is black-on-white; a cool steel blue keeps that restraint. */
+
+:root {
+  --primary: oklch(0.5 0.09 255); /* #3E6596 */
+  --primary-foreground: oklch(0.99 0.005 255);
+  --accent-2: oklch(0.6 0.1 225); /* #2B8CAD */
+  --accent-soft: oklch(0.955 0.015 255); /* #EAF1FA */
+  --ring: var(--primary);
+}
+
+.dark {
+  --primary: oklch(0.72 0.09 255); /* #7EA7DC */
+  --primary-foreground: oklch(0.15 0.03 255);
+  --accent-2: oklch(0.76 0.1 225); /* #63BFE1 */
+  --accent-soft: oklch(0.3 0.04 255); /* #202F42 */
+}

@@ -1,0 +1,44 @@
+{
+  "summary": "What product/dev-tool marketing sites look like in September 2026, from the sources below, filtered through what the house already is (loom services, Latchkey, the console shell). Decisions are what the shell does; rejected is what it deliberately does not.",
+  "sources": [
+    "https://www.saasframe.io/blog/10-saas-landing-page-trends-for-2026-with-real-examples",
+    "https://www.saashero.net/design/landing-page-design-inspiration-2026/",
+    "https://www.vezadigital.com/post/best-devtool-website-design-examples",
+    "https://www.vezadigital.com/post/best-saas-landing-page-examples",
+    "https://toimi.pro/blog/best-saas-website-designs/",
+    "https://www.figma.com/resource-library/web-design-trends/",
+    "https://www.hostinger.com/tutorials/web-design-trends/",
+    "https://fireart.studio/blog/the-best-web-design-trends/",
+    "https://www.loungelizard.com/blog/web-design-color-trends/",
+    "https://www.nopanicdesign.com/blog/web-design-trends-2026-colors-fonts/",
+    "https://www.wazile.com/blog/outdated-web-design-trends-to-avoid-in-2026/",
+    "https://bubble.io/blog/web-design-trends/",
+    "https://lineanddotstudio.com/blog/website-design-trends-2026/",
+    "https://www.thehoopstudio.com/resources/insights/design-trends-to-leave-behind-and-whats-next-for-web-in-2026"
+  ],
+  "decisions": [
+    { "area": "hero", "decision": "Text-first hero, left-aligned: eyebrow, serif display headline with one italic accent word, lede, two buttons, then the product itself (Terminal / Window / live island) under one ambient glow.", "because": "The sites held up as the bar (Linear, Vercel) open with precise typography and a product-forward hero — 'show the product working' replaced screenshots and illustrations in 2026 — and a left-aligned column reads as editorial rather than as a template." },
+    { "area": "type", "decision": "Instrument Serif for display over Geist body and Geist Mono eyebrows; 17px body; fluid display sizes 44–84px.", "because": "Neo-serif display paired with monospace is the 2026 type signature, and Geist body keeps the site the same object as the console. One serif at one weight (plus italic) is 43 KB and enough." },
+    { "area": "colour", "decision": "The console shell's mauve neutral and per-product accent, verbatim for the six console products; sites sit one step lighter (paper) than consoles.", "because": "'Unbleached' neutrals (Pantone's Cloud Dancer year) are the 2026 default and the shell already has one; sharing tokens is what makes site → console feel like one product." },
+    { "area": "gradient", "decision": "Gradients only as (a) the primary button's two-stop gradient and (b) one ambient radial glow behind the hero and the closing CTA.", "because": "2026 gradients are 'cinematic and layered, soft-glow, ambient' — one light source, not a blob field; the button gradient is the console's, so the CTA is the same object there and here." },
+    { "area": "texture", "decision": "CSS/SVG film grain over the glow; no WebGL, no 3D.", "because": "Texture replaced heavy 3D in 2026 precisely because it costs nothing at runtime; the grain makes the glow read as light on paper." },
+    { "area": "motion", "decision": "One reveal-on-scroll (12px fade-up, staggered in the hero), respecting prefers-reduced-motion; no scroll-jacking, no kinetic type.", "because": "'Minimal motion that adds meaning' is the stated 2026 standard; every source that lists what to avoid lists excessive animation and parallax." },
+    { "area": "navigation", "decision": "Sticky glassy nav with four links, a ghost Sign in and one primary Console button; a <details> menu on phones.", "because": "Navigation is 'part of the conversion funnel' in 2026: fewer links, clearer CTA, smart sticky header — and a details element needs no script." },
+    { "area": "layout", "decision": "Hairline feature grids by default; a bento only where cell size maps to importance (Bento/BentoCell exist, the template uses one).", "because": "Bento is not being abandoned but is the most-cited cliché when used decoratively; 'a bento earns its keep when panel size reflects importance' is the 2026 guidance." },
+    { "area": "product", "decision": "Terminal and Window components are static markup of the real thing (real commands, the real console layout).", "because": "Interactive/real product demos are the top-cited 2026 conversion lever; static markup indexes, prints, and never lags — a live island can replace it per product." },
+    { "area": "dark mode", "decision": "System-following dark with a persisted toggle applied before first paint; the dark scale is separately tuned (the shell's), not inverted, not pure black.", "because": "Dark mode is a first-class state in 2026 ('Dark Mode 3.0' for OLED); the console already has the tuned scale." },
+    { "area": "footer", "decision": "The footer ends with 'the house': every sibling product with its accent dot.", "because": "The portfolio is the differentiator — each site pointing at the others is cross-promotion the products get for free." },
+    { "area": "docs", "decision": "A Docs layout in the same frame (sticky left nav, prose column, serif headings, Shiki code) rather than Starlight.", "because": "Latchkey's docs are two hand-written pages today; Starlight would bring its own theme and fight the house look for a handful of pages." },
+    { "area": "stack", "decision": "Astro 7 static + Tailwind v4 + MDX collections on Cloudflare Pages, shipped as a git-dependency package of Astro source like the shell.", "because": "Two of the house's newer sites (runsheet, payntally) already chose Astro on Cloudflare; static output is the right shape for marketing; the shell's git-dependency model is proven." }
+  ],
+  "rejected": [
+    { "trend": "Bento grid as the page's default layout", "why": "Overused into cliché; kept only as an option where size = importance." },
+    { "trend": "Glassmorphism panels and gradient-blob backgrounds", "why": "Decoration that reads as a template; the only glass is the nav, the only gradient is one light and one button." },
+    { "trend": "Kinetic / viewport-scaled typography and scroll-jacking", "why": "Hurts reading and performance; the display face does the expressive work standing still." },
+    { "trend": "WebGL / 3D / shader heroes", "why": "Stripe and Vercel can afford the craft and the payload; a house of one-person products cannot, and grain + glow gets the depth." },
+    { "trend": "AI-generated imagery and stock photography", "why": "Both named as trust-eroding in 2026 surveys; the product is the imagery." },
+    { "trend": "AI-personalised dynamic copy/CTAs", "why": "A conversion tactic for funded marketing teams; not a design system concern." },
+    { "trend": "Centred-everything layouts", "why": "The template look; left-aligned columns read as written, not generated." },
+    { "trend": "A second sans (Inter etc.) for body", "why": "The console is Geist; the site is Geist. One family plus one display serif." }
+  ]
+}

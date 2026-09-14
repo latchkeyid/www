@@ -1,0 +1,17 @@
+/* inflow accent: harbour teal → amber. Import after base.css.
+   Source: PROVISIONAL — inflow has no recorded brand; Pay N Tally's teal/amber family, cooled so it does not read as runsheet. */
+
+:root {
+  --primary: oklch(0.53 0.1 200); /* #007C83 */
+  --primary-foreground: oklch(0.99 0.005 200);
+  --accent-2: oklch(0.72 0.15 70); /* #DF911A */
+  --accent-soft: oklch(0.955 0.02 200); /* #E2F5F5 */
+  --ring: var(--primary);
+}
+
+.dark {
+  --primary: oklch(0.72 0.1 200); /* #48B7BD */
+  --primary-foreground: oklch(0.15 0.03 200);
+  --accent-2: oklch(0.8 0.14 75); /* #F2AF48 */
+  --accent-soft: oklch(0.3 0.045 200); /* #0A3537 */
+}

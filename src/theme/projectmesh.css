@@ -1,0 +1,17 @@
+/* projectmesh accent: mesh blue → cyan. Import after base.css.
+   Source: projectmesh-io/mesh-marketing index.html: --color-accent #2563EB, --color-cyan #06B6D4. */
+
+:root {
+  --primary: oklch(0.546 0.215 262.9); /* #2563EB */
+  --primary-foreground: oklch(0.99 0.005 262.9);
+  --accent-2: oklch(0.72 0.13 205); /* #00BBCB */
+  --accent-soft: oklch(0.955 0.02 262); /* #E9F1FE */
+  --ring: var(--primary);
+}
+
+.dark {
+  --primary: oklch(0.714 0.143 254.6); /* #60A5FA */
+  --primary-foreground: oklch(0.15 0.03 254.6);
+  --accent-2: oklch(0.8 0.12 205); /* #44D4E2 */
+  --accent-soft: oklch(0.3 0.06 260); /* #1B2E4C */
+}

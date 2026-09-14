@@ -1,0 +1,17 @@
+/* wardroom accent: cerulean. Import after base.css.
+   Source: the console shell's accent, verbatim. */
+
+:root {
+  --primary: oklch(0.55 0.11 232); /* #0A7CA6 */
+  --primary-foreground: oklch(0.99 0.005 232);
+  --accent-2: oklch(0.63 0.105 200); /* #0E9CA2 */
+  --accent-soft: oklch(0.955 0.02 230); /* #E3F3FB */
+  --ring: var(--primary);
+}
+
+.dark {
+  --primary: oklch(0.72 0.11 230); /* #50B1DC */
+  --primary-foreground: oklch(0.15 0.03 230);
+  --accent-2: oklch(0.77 0.11 200); /* #4AC9D0 */
+  --accent-soft: oklch(0.29 0.05 230); /* #0A303F */
+}

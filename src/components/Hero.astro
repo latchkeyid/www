@@ -1,0 +1,40 @@
+---
+/**
+ * The hero: left-aligned text, the headline in the display face with one
+ * italic accent word, two CTAs, and a slot below for the product itself —
+ * a <Window>, a <Terminal>, a screenshot. One ambient glow behind it.
+ *
+ * Pass `title` as text with the accent word wrapped in *asterisks*.
+ */
+import Button from "./Button.astro";
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lede?: string;
+  primary?: { label: string; href: string };
+  secondary?: { label: string; href: string };
+  align?: "left" | "center";
+}
+const { eyebrow, title, lede, primary, secondary, align = "left" } = Astro.props;
+const parts = title.split(/\*([^*]+)\*/);
+---
+<section class="glow grain overflow-hidden">
+  <div class:list={["mx-auto w-full max-w-page px-6 pt-20 pb-12 md:px-8 md:pt-28 md:pb-16", align === "center" && "text-center"]}>
+    <div class:list={["max-w-3xl", align === "center" && "mx-auto"]}>
+      {eyebrow && <p class="eyebrow reveal mb-5">{eyebrow}</p>}
+      <h1 class="display-1 reveal">{parts.map((p, i) => (i % 2 === 1 ? <em class="display-accent">{p}</em> : p))}</h1>
+      {lede && <p class="reveal mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl" style="transition-delay: 80ms">{lede}</p>}
+      {(primary || secondary) && (
+        <div class:list={["reveal mt-9 flex flex-wrap gap-3", align === "center" && "justify-center"]} style="transition-delay: 140ms">
+          {primary && <Button href={primary.href} size="lg">{primary.label}</Button>}
+          {secondary && <Button href={secondary.href} variant="outline" size="lg">{secondary.label}</Button>}
+        </div>
+      )}
+    </div>
+    {Astro.slots.has("default") && (
+      <div class="reveal mt-14 md:mt-20" style="transition-delay: 220ms">
+        <slot />
+      </div>
+    )}
+  </div>
+</section>

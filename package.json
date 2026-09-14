@@ -1,0 +1,41 @@
+{
+  "name": "@latchkey/www",
+  "version": "0.1.0",
+  "description": "One design and one set of layouts for the product marketing sites: latchkey, tripline, runsheet, wardroom, purser, foghorn, grapevine, inflow and the rest of the house.",
+  "type": "module",
+  "private": false,
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/latchkeyid/www.git"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./house": "./src/house.ts",
+    "./layouts/*": "./src/layouts/*",
+    "./components/*": "./src/components/*",
+    "./theme/*.css": "./src/theme/*.css",
+    "./package.json": "./package.json"
+  },
+  "sideEffects": [
+    "*.css"
+  ],
+  "scripts": {
+    "dev": "npm run dev --prefix template",
+    "build": "npm run build --prefix template",
+    "check": "npm run check --prefix template",
+    "screenshots": "playwright test",
+    "sync-accents": "node scripts/sync-accents.mjs",
+    "sync-fonts": "node scripts/sync-fonts.mjs"
+  },
+  "peerDependencies": {
+    "astro": "^7.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0"
+  }
+}

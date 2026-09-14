@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.astro/
+template/node_modules/
+template/dist/
+template/.astro/
+test-results/
+.DS_Store

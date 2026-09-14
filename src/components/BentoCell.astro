@@ -1,0 +1,11 @@
+---
+interface Props { span?: 2 | 3 | 4 | 6; rows?: 1 | 2; title?: string; eyebrow?: string; class?: string }
+const { span = 3, rows = 1, title, eyebrow, class: cls = "" } = Astro.props;
+const spans = { 2: "md:col-span-2", 3: "md:col-span-3", 4: "md:col-span-4", 6: "md:col-span-6" }[span];
+---
+<div class:list={["reveal flex flex-col overflow-hidden rounded-xl border bg-card p-6 shadow-card", spans, rows === 2 && "md:row-span-2", cls]}>
+  {eyebrow && <p class="eyebrow mb-2">{eyebrow}</p>}
+  {title && <h3 class="text-xl font-medium tracking-tight">{title}</h3>}
+  <div class="mt-2 text-sm text-muted-foreground"><slot /></div>
+  {Astro.slots.has("visual") && <div class="mt-auto pt-6"><slot name="visual" /></div>}
+</div>

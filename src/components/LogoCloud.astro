@@ -1,0 +1,12 @@
+---
+/** "Used by" row: names in the display face at low contrast; give it logos as children instead when you have them. */
+interface Props { label?: string; names?: string[] }
+const { label = "Built for", names = [] } = Astro.props;
+---
+<div class="reveal flex flex-col items-center gap-5 py-10 md:flex-row md:justify-between">
+  <p class="eyebrow text-muted-foreground">{label}</p>
+  <ul class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+    {names.map((n) => <li class="font-display text-xl text-muted-foreground/80">{n}</li>)}
+    <slot />
+  </ul>
+</div>

@@ -1,0 +1,23 @@
+---
+import { getCollection, render } from "astro:content";
+import Site from "../layouts/Site.astro";
+import Section from "@latchkey/www/components/Section.astro";
+import Badge from "@latchkey/www/components/Badge.astro";
+import ThemeSwitcher from "../components/ThemeSwitcher.astro";
+const entries = (await getCollection("changelog")).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const rendered = await Promise.all(entries.map(async (e) => ({ e, Content: (await render(e)).Content })));
+const fmt = (d: Date) => d.toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" });
+---
+<Site title="Changelog — Latchkey" description="What shipped, when.">
+  <Section eyebrow="Changelog" title="What shipped.">
+    <ol class="grid gap-12">
+      {rendered.map(({ e, Content }) => (
+        <li class="reveal grid gap-4 md:grid-cols-[10rem_1fr]">
+          <div class="flex items-start gap-3 md:flex-col md:gap-2"><time class="font-mono text-xs text-muted-foreground" datetime={e.data.date.toISOString()}>{fmt(e.data.date)}</time>{e.data.tag && <Badge tone="accent">{e.data.tag}</Badge>}</div>
+          <div class="prose"><h2 class="!mt-0 text-2xl">{e.data.title}</h2><Content /></div>
+        </li>
+      ))}
+    </ol>
+  </Section>
+  <ThemeSwitcher />
+</Site>

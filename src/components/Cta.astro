@@ -1,0 +1,17 @@
+---
+/** The closing call to action: display headline, one line, two buttons, on its own glow. */
+import Button from "./Button.astro";
+interface Props { title: string; lede?: string; primary?: { label: string; href: string }; secondary?: { label: string; href: string } }
+const { title, lede, primary, secondary } = Astro.props;
+const parts = title.split(/\*([^*]+)\*/);
+---
+<section class="glow overflow-hidden py-20 md:py-28">
+  <div class="mx-auto w-full max-w-page px-6 text-center md:px-8">
+    <h2 class="display-2 reveal mx-auto max-w-2xl">{parts.map((p, i) => (i % 2 === 1 ? <em class="display-accent">{p}</em> : p))}</h2>
+    {lede && <p class="reveal mx-auto mt-4 max-w-xl text-lg text-muted-foreground">{lede}</p>}
+    <div class="reveal mt-8 flex flex-wrap justify-center gap-3">
+      {primary && <Button href={primary.href} size="lg">{primary.label}</Button>}
+      {secondary && <Button href={secondary.href} variant="outline" size="lg">{secondary.label}</Button>}
+    </div>
+  </div>
+</section>

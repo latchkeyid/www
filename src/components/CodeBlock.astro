@@ -1,0 +1,9 @@
+---
+/** Code with a language tab. Use Astro's <Code> for highlighting when you want it; this is the frame. */
+interface Props { lang?: string; class?: string }
+const { lang, class: cls = "" } = Astro.props;
+---
+<div class:list={["overflow-hidden rounded-xl border bg-card", cls]}>
+  {lang && <div class="border-b border-border-soft px-4 py-2 font-mono text-xs text-muted-foreground">{lang}</div>}
+  <pre class="overflow-x-auto p-4 font-mono text-[0.85rem] leading-relaxed"><code><slot /></code></pre>
+</div>

@@ -1,0 +1,16 @@
+---
+/** <a> or <button> on the .btn classes. */
+interface Props {
+  href?: string;
+  variant?: "primary" | "outline" | "ghost";
+  size?: "sm" | "md" | "lg";
+  class?: string;
+  type?: "button" | "submit";
+  external?: boolean;
+}
+const { href, variant = "primary", size = "md", class: cls = "", type = "button", external } = Astro.props;
+const classes = ["btn", `btn-${variant}`, size === "sm" && "btn-sm", size === "lg" && "btn-lg", cls];
+const rel = external ? "noopener" : undefined;
+const target = external ? "_blank" : undefined;
+---
+{href ? <a href={href} class:list={classes} rel={rel} target={target}><slot /></a> : <button type={type} class:list={classes}><slot /></button>}

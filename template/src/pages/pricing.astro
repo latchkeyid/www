@@ -1,0 +1,25 @@
+---
+import Site from "../layouts/Site.astro";
+import Section from "@latchkey/www/components/Section.astro";
+import Pricing from "@latchkey/www/components/Pricing.astro";
+import PricingTier from "@latchkey/www/components/PricingTier.astro";
+import Faq from "@latchkey/www/components/Faq.astro";
+import FaqItem from "@latchkey/www/components/FaqItem.astro";
+import ThemeSwitcher from "../components/ThemeSwitcher.astro";
+---
+<Site title="Pricing — Latchkey" description="Simple pricing for a passwordless identity provider.">
+  <Section eyebrow="Pricing" title="Pay for the doors you *use*." lede="Every plan is the whole product. Tiers are about how many people walk through.">
+    <Pricing>
+      <PricingTier name="Free" price="$0" period="/ month" blurb="For a side project or an internal tool." features={["1 organisation", "Up to 500 monthly active identities", "Magic links, codes, passkeys", "Community support"]} cta={{ label: "Start free", href: "https://console.latchkey.id" }} />
+      <PricingTier name="Team" price="$49" period="/ month" blurb="For a product with customers." features={["Unlimited organisations", "Up to 10,000 MAI, then $0.005 each", "Enterprise SSO for your customers", "Custom auth domains and branding", "Email support"]} cta={{ label: "Start a trial", href: "https://console.latchkey.id" }} featured />
+      <PricingTier name="Self-hosted" price="Yours" blurb="One binary, one Postgres, your cloud." features={["Everything in Team", "Your KMS, your region", "Terraform provider", "Support contract available"]} cta={{ label: "Talk to us", href: "mailto:hello@latchkey.id" }} />
+    </Pricing>
+  </Section>
+  <Section spacing="tight">
+    <Faq>
+      <FaqItem q="What is a monthly active identity?">An email or phone number that completed a sign-in through one of your clients in the calendar month. Staff and your own team count too; bots that never finish the link do not.</FaqItem>
+      <FaqItem q="Can I move between hosted and self-hosted?">Yes. It is the same binary and the same schema; export the event log and replay it.</FaqItem>
+    </Faq>
+  </Section>
+  <ThemeSwitcher />
+</Site>

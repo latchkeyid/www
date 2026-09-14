@@ -1,0 +1,14 @@
+---
+title: Auth hooks
+description: Run your own checks and enrichment at sign-in, without a callback into your product.
+group: Concepts
+order: 2
+---
+
+Latchkey never calls back into your product during sign-in. Tenancy is resolved by your gateway from its own read models per request — the `myAccess` pattern — so a hook is a policy in your service, not a webhook you must keep up.
+
+## What you can react to
+
+- **Membership changes** — signed webhooks (`WebhookEndpoint`), retried, dead-lettered.
+- **Refused sign-ins** — the attempts dashboard, or `attemptStats` over the gateway.
+- **New devices** — device attestation results ride the token's `amr`.

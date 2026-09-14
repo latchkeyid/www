@@ -1,0 +1,10 @@
+---
+/** One feature: icon slot, title, copy. Sits in <Features> as a hairline-separated cell. */
+interface Props { title: string; class?: string }
+const { title, class: cls = "" } = Astro.props;
+---
+<div class:list={["reveal bg-card p-6 md:p-7", cls]}>
+  {Astro.slots.has("icon") && <div class="mb-4 inline-flex size-9 items-center justify-center rounded-md bg-accent-soft text-primary [&_svg]:size-4"><slot name="icon" /></div>}
+  <h3 class="text-lg font-medium tracking-tight">{title}</h3>
+  <p class="mt-2 text-sm text-muted-foreground"><slot /></p>
+</div>

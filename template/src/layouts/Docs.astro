@@ -1,0 +1,9 @@
+---
+import "../styles/global.css";
+import Base from "@latchkey/www/layouts/Docs.astro";
+import { site } from "../site";
+interface Props { title: string; description: string; nav: { group: string; items: { title: string; href: string }[] }[]; section?: string; edit?: string }
+---
+<Base product={site.product} links={site.links} {...Astro.props}>
+  <slot />
+</Base>

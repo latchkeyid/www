@@ -1,0 +1,52 @@
+---
+/**
+ * Sticky, glassy, few links, one CTA. Mobile: a <details> menu, no JS.
+ * Pass `links` (label, href) and `cta` (label, href); the wordmark slot
+ * is the product's name in the display face unless a logo is given.
+ */
+import ThemeToggle from "./ThemeToggle.astro";
+interface Props {
+  name: string;
+  links?: { label: string; href: string }[];
+  cta?: { label: string; href: string };
+  secondary?: { label: string; href: string };
+}
+const { name, links = [], cta, secondary } = Astro.props;
+// A forwarded-but-empty slot still counts as present, so decide on the rendered content.
+const logo = (await Astro.slots.render("logo")).trim();
+const path = Astro.url.pathname;
+const active = (href: string) => path === href || (href !== "/" && path.startsWith(href));
+---
+<header class="glass sticky top-0 z-40 border-b border-border-soft">
+  <div class="mx-auto flex h-16 w-full max-w-page items-center justify-between gap-6 px-6 md:px-8">
+    <a href="/" class="flex items-center gap-2.5 text-foreground" aria-label={`${name} home`}>
+      {logo ? <Fragment set:html={logo} /> : <span class="inline-block size-2.5 rounded-full bg-accent-gradient" aria-hidden="true"></span>}
+      <span class="font-display text-2xl leading-none">{name}</span>
+    </a>
+    <nav class="hidden items-center gap-1 md:flex" aria-label="Primary">
+      {links.map((l) => (
+        <a href={l.href} class:list={["rounded-md px-3 py-1.5 text-sm transition-colors hover:text-foreground", active(l.href) ? "text-foreground" : "text-muted-foreground"]} aria-current={active(l.href) ? "page" : undefined}>{l.label}</a>
+      ))}
+    </nav>
+    <div class="hidden items-center gap-2 md:flex">
+      <ThemeToggle />
+      {secondary && <a href={secondary.href} class="btn btn-ghost btn-sm">{secondary.label}</a>}
+      {cta && <a href={cta.href} class="btn btn-primary btn-sm">{cta.label}</a>}
+    </div>
+    <details class="group relative md:hidden">
+      <summary class="flex size-9 cursor-pointer list-none items-center justify-center rounded-md text-muted-foreground hover:bg-accent [&::-webkit-details-marker]:hidden" aria-label="Menu">
+        <svg class="size-5 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="hidden size-5 group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </summary>
+      <div class="absolute top-11 right-0 flex w-64 flex-col gap-1 rounded-lg border bg-popover p-2 shadow-card">
+        {links.map((l) => <a href={l.href} class="rounded-md px-3 py-2 text-sm text-foreground hover:bg-accent">{l.label}</a>)}
+        <div class="my-1 h-px bg-border"></div>
+        <div class="flex items-center gap-2 px-1">
+          <ThemeToggle />
+          {secondary && <a href={secondary.href} class="btn btn-ghost btn-sm">{secondary.label}</a>}
+          {cta && <a href={cta.href} class="btn btn-primary btn-sm flex-1">{cta.label}</a>}
+        </div>
+      </div>
+    </details>
+  </div>
+</header>

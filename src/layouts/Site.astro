@@ -1,0 +1,102 @@
+---
+/**
+ * The page frame: <head> with title/description/canonical/OG/JSON-LD,
+ * the theme class applied before first paint, the Nav, the Footer, and
+ * the reveal-on-scroll observer. Every page of a product site uses it.
+ *
+ * `product` is the house id (see house.ts): it names the site, leaves
+ * it out of the footer ring, and sets the accent dots for the others.
+ */
+import { house, product as lookup } from "../house";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  product: string;
+  /** Overrides house.ts for the wordmark. */
+  name?: string;
+  links?: { label: string; href: string }[];
+  cta?: { label: string; href: string };
+  secondary?: { label: string; href: string };
+  columns?: { title: string; links: { label: string; href: string }[] }[];
+  ogImage?: string;
+  /** "light" | "dark" | "system" — what a first visit gets. */
+  defaultTheme?: "light" | "dark" | "system";
+  /** Set false on docs pages that render their own footer. */
+  footer?: boolean;
+  class?: string;
+}
+const p = lookup(Astro.props.product);
+const {
+  title,
+  description,
+  name = p?.name ?? Astro.props.product,
+  links = [],
+  cta = p?.console ? { label: "Console", href: p.console } : undefined,
+  secondary,
+  columns = [],
+  ogImage,
+  defaultTheme = "system",
+  footer = true,
+  class: cls = "",
+} = Astro.props;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : undefined;
+const jsonLd = JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name, url: p?.url ?? Astro.site?.toString() });
+// The footer ring paints each sibling's dot in its own accent; the values are
+// the light-mode primaries so a single stylesheet works for every site.
+const dots = house.map((h) => `--house-${h.accent}: ${{
+  latchkey: "#6E56CF", tripline: "#5B5BD6", runsheet: "#10A594", wardroom: "#0A7CA6", purser: "#688003", foghorn: "#BF308F",
+  grapevine: "#007A46", inflow: "#007C83", payntally: "#009586", ten99: "#0E9A3F", optrader: "#E36927", thirtysixzero: "#3E6596", projectmesh: "#2563EB",
+}[h.accent] ?? "currentColor"}`).join(";");
+---
+<!doctype html>
+<html lang="en" style={dots}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
+    <meta name="generator" content={Astro.generator} />
+    <script type="application/ld+json" set:html={jsonLd} />
+    <slot name="head" />
+    <script is:inline define:vars={{ defaultTheme }}>
+      // Apply the theme before paint: the stored choice, else the default
+      // ("system" follows prefers-color-scheme). Same key as the console.
+      (function () {
+        var t = null;
+        try { t = localStorage.getItem("www.theme"); } catch (e) {}
+        var mode = t || defaultTheme;
+        var dark = mode === "dark" || (mode === "system" && matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.classList.toggle("dark", dark);
+      })();
+    </script>
+  </head>
+  <body class:list={["flex min-h-screen flex-col", cls]}>
+    <Nav name={name} links={links} cta={cta} secondary={secondary}><slot name="logo" slot="logo" /></Nav>
+    <main class="flex-1"><slot /></main>
+    {footer && <Footer name={name} product={Astro.props.product} columns={columns}><slot name="blurb" slot="blurb" /></Footer>}
+    <script>
+      // .reveal elements fade up as they enter; the OS motion setting wins (see base.css).
+      const els = document.querySelectorAll<HTMLElement>(".reveal");
+      if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        els.forEach((el) => el.setAttribute("data-shown", ""));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => entries.forEach((e) => { if (e.isIntersecting) { (e.target as HTMLElement).setAttribute("data-shown", ""); io.unobserve(e.target); } }),
+          { rootMargin: "0px 0px -8% 0px", threshold: 0.05 },
+        );
+        els.forEach((el) => io.observe(el));
+      }
+    </script>
+  </body>
+</html>

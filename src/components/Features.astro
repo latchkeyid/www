@@ -1,0 +1,9 @@
+---
+/** A grid of <Feature>s: 3 columns from md, 2 on tablets. */
+interface Props { columns?: 2 | 3 | 4; class?: string }
+const { columns = 3, class: cls = "" } = Astro.props;
+const cols = { 2: "md:grid-cols-2", 3: "sm:grid-cols-2 lg:grid-cols-3", 4: "sm:grid-cols-2 lg:grid-cols-4" }[columns];
+---
+<div class:list={["grid gap-px overflow-hidden rounded-xl border bg-border", cols, cls]}>
+  <slot />
+</div>

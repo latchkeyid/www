@@ -1,0 +1,17 @@
+/* grapevine accent: vine green → purple. Import after base.css.
+   Source: GrapevineNetwork/website globals.css: --primary green, --brand-purple as the second stop. */
+
+:root {
+  --primary: oklch(0.5 0.14 160); /* #007A46 */
+  --primary-foreground: oklch(0.99 0.005 160);
+  --accent-2: oklch(0.55 0.2 290); /* #7552DB */
+  --accent-soft: oklch(0.955 0.03 160); /* #E0F7E9 */
+  --ring: var(--primary);
+}
+
+.dark {
+  --primary: oklch(0.72 0.16 152); /* #42C070 */
+  --primary-foreground: oklch(0.15 0.03 152);
+  --accent-2: oklch(0.72 0.17 295); /* #AE8BFF */
+  --accent-soft: oklch(0.3 0.05 160); /* #143525 */
+}

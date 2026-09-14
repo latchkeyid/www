@@ -1,0 +1,17 @@
+/* payntally accent: tally teal → amber. Import after base.css.
+   Source: inflow-tech/payntally tailwind.config.js: tally-teal #0D9488, tally-amber #F59E0B. */
+
+:root {
+  --primary: oklch(0.6 0.11 183); /* #009586 */
+  --primary-foreground: oklch(0.99 0.005 183);
+  --accent-2: oklch(0.77 0.16 70); /* #F49F1E */
+  --accent-soft: oklch(0.955 0.025 183); /* #DFF6F2 */
+  --ring: var(--primary);
+}
+
+.dark {
+  --primary: oklch(0.75 0.11 180); /* #4EC5B1 */
+  --primary-foreground: oklch(0.15 0.03 180);
+  --accent-2: oklch(0.82 0.15 75); /* #FCB442 */
+  --accent-soft: oklch(0.3 0.045 183); /* #0D3530 */
+}

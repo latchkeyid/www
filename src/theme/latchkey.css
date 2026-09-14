@@ -1,0 +1,17 @@
+/* latchkey accent: violet. Import after base.css.
+   Source: the console shell's accent, verbatim. */
+
+:root {
+  --primary: oklch(0.542 0.179 288); /* #6E56CF */
+  --primary-foreground: oklch(0.99 0.005 288);
+  --accent-2: oklch(0.586 0.189 325.1); /* #B14AB8 */
+  --accent-soft: oklch(0.955 0.018 296.6); /* #F1EEFB */
+  --ring: var(--primary);
+}
+
+.dark {
+  --primary: oklch(0.686 0.133 290.9); /* #9B8AE6 */
+  --primary-foreground: oklch(0.15 0.03 290.9);
+  --accent-2: oklch(0.714 0.169 322.3); /* #D37BE0 */
+  --accent-soft: oklch(0.293 0.078 287.9); /* #2B2450 */
+}

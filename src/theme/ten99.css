@@ -1,0 +1,17 @@
+/* ten99 accent: filing green. Import after base.css.
+   Source: 1099-w9/replit-site: --primary hsl(142 76% 36%) (#16A34A). */
+
+:root {
+  --primary: oklch(0.6 0.17 148); /* #0E9A3F */
+  --primary-foreground: oklch(0.99 0.005 148);
+  --accent-2: oklch(0.7 0.14 175); /* #00BA99 */
+  --accent-soft: oklch(0.955 0.03 150); /* #E3F6E6 */
+  --ring: var(--primary);
+}
+
+.dark {
+  --primary: oklch(0.75 0.16 150); /* #55C975 */
+  --primary-foreground: oklch(0.15 0.03 150);
+  --accent-2: oklch(0.78 0.13 175); /* #41D2B3 */
+  --accent-soft: oklch(0.3 0.05 150); /* #1A3520 */
+}

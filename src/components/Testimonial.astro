@@ -1,0 +1,9 @@
+---
+/** One quote in the display face. Real quotes only; the component is not a reason to invent one. */
+interface Props { who: string; role?: string }
+const { who, role } = Astro.props;
+---
+<figure class="reveal rounded-xl border bg-card p-8 shadow-card">
+  <blockquote class="font-display text-2xl leading-snug md:text-3xl">“<slot />”</blockquote>
+  <figcaption class="mt-5 text-sm"><span class="font-medium">{who}</span>{role && <span class="text-muted-foreground"> · {role}</span>}</figcaption>
+</figure>

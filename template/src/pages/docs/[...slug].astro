@@ -1,0 +1,21 @@
+---
+import { getCollection, render } from "astro:content";
+import Docs from "../../layouts/Docs.astro";
+import ThemeSwitcher from "../../components/ThemeSwitcher.astro";
+
+export async function getStaticPaths() {
+  const pages = await getCollection("docs");
+  return pages.map((p) => ({ params: { slug: p.id }, props: { page: p } }));
+}
+const { page } = Astro.props;
+const { Content } = await render(page);
+const all = (await getCollection("docs")).sort((a, b) => a.data.order - b.data.order);
+const groups = [...new Set(all.map((p) => p.data.group))];
+const nav = groups.map((g) => ({ group: g, items: all.filter((p) => p.data.group === g).map((p) => ({ title: p.data.title, href: `/docs/${p.id}` })) }));
+---
+<Docs title={`${page.data.title} — Latchkey docs`} description={page.data.description} nav={nav}>
+  <h1>{page.data.title}</h1>
+  <p class="!text-lg">{page.data.description}</p>
+  <Content />
+  <ThemeSwitcher />
+</Docs>

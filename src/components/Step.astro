@@ -1,0 +1,9 @@
+---
+interface Props { n: number | string; title: string }
+const { n, title } = Astro.props;
+---
+<li class="reveal relative border-t pt-6">
+  <span class="eyebrow absolute -top-2.5 left-0 bg-background pr-3">{String(n).padStart(2, "0")}</span>
+  <h3 class="text-lg font-medium tracking-tight">{title}</h3>
+  <p class="mt-2 text-sm text-muted-foreground"><slot /></p>
+</li>

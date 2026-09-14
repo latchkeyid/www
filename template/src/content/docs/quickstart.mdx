@@ -1,0 +1,30 @@
+---
+title: Quickstart
+description: Sign users in from a single-page app, a mobile app, or verify tokens in a Go backend.
+group: Start here
+order: 1
+---
+
+Register a public client, send the browser to `/oauth/authorize` with a PKCE challenge, and exchange the code. The access token is an RS256 JWT whose `ns` claim carries every tenant the person belongs to.
+
+## Discovery
+
+```sh
+curl -s https://auth.latchkey.id/.well-known/openid-configuration | jq .
+```
+
+## A single-page app
+
+1. Generate a verifier and its S256 challenge.
+2. Redirect to `authorize` with `response_type=code`, your `client_id`, `redirect_uri`, `code_challenge` and a `state`.
+3. On the callback, POST `code` + `code_verifier` to `/oauth/token`.
+
+> Latchkey signs people in by email link, which opens in a **new tab** — keep the verifier in `localStorage`, not `sessionStorage`.
+
+## Verifying in Go
+
+| Claim | Meaning |
+| --- | --- |
+| `sub` | the identity: uuid5 of the credential |
+| `ns` | namespace → level, scoped to your client's org |
+| `aud` | always `latchkey` for access tokens |

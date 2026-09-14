@@ -1,0 +1,122 @@
+---
+import Site from "../layouts/Site.astro";
+import Hero from "@latchkey/www/components/Hero.astro";
+import Section from "@latchkey/www/components/Section.astro";
+import Features from "@latchkey/www/components/Features.astro";
+import Feature from "@latchkey/www/components/Feature.astro";
+import Bento from "@latchkey/www/components/Bento.astro";
+import BentoCell from "@latchkey/www/components/BentoCell.astro";
+import Steps from "@latchkey/www/components/Steps.astro";
+import Step from "@latchkey/www/components/Step.astro";
+import Stats from "@latchkey/www/components/Stats.astro";
+import Stat from "@latchkey/www/components/Stat.astro";
+import Terminal from "@latchkey/www/components/Terminal.astro";
+import Window from "@latchkey/www/components/Window.astro";
+import Faq from "@latchkey/www/components/Faq.astro";
+import FaqItem from "@latchkey/www/components/FaqItem.astro";
+import Cta from "@latchkey/www/components/Cta.astro";
+import LogoCloud from "@latchkey/www/components/LogoCloud.astro";
+import ThemeSwitcher from "../components/ThemeSwitcher.astro";
+---
+<Site title="Latchkey — let yourself in" description="Latchkey is a passwordless OpenID Connect identity provider. One key, every door.">
+  <Fragment slot="blurb">Passwordless identity for every product on the ring. Built in the open, run in Australia.</Fragment>
+
+  <Hero
+    eyebrow="Identity, passwordless"
+    title="One key, *every* door."
+    lede="Latchkey is an OpenID Connect provider without passwords: magic links, phone codes and passkeys, with tenants, teams and roles that speak your product's language."
+    primary={{ label: "Open the console", href: "https://console.latchkey.id" }}
+    secondary={{ label: "Read the quickstart", href: "/docs/quickstart" }}
+  >
+    <Terminal
+      title="sign-in — a Go backend"
+      lines={[
+        { prompt: "$", text: "curl -s https://auth.latchkey.id/.well-known/openid-configuration | jq .issuer" },
+        { text: "\"https://auth.latchkey.id\"", dim: true },
+        { prompt: "$", text: "latchkey -bootstrap you@example.com" },
+        { text: "identity ensured · org latchkey claimed · latchkey:owner granted", dim: true },
+        { prompt: "$", text: "go test ./..." },
+        { text: "ok  github.com/latchkeyid/latchkey/e2e  12.4s", dim: true },
+      ]}
+    />
+  </Hero>
+
+  <div class="mx-auto w-full max-w-page px-6 md:px-8">
+    <LogoCloud label="Behind" names={["grapevine", "inflow", "optrader", "tripline", "runsheet"]} />
+  </div>
+
+  <Section id="product" eyebrow="What you get" title="The whole door, not just the lock." lede="Everything a product needs to sign people in and know who they are — and nothing it has to build itself.">
+    <Features>
+      <Feature title="Passwordless">
+        <svg slot="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m4 7 8 6 8-6"/></svg>
+        Magic links, email and phone codes, passkeys — with per-client captcha and device attestation behind them. Nothing to remember, nothing to leak.
+      </Feature>
+      <Feature title="Standard OIDC">
+        <svg slot="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+        Discovery, PKCE, rotating refresh tokens, JWKS, token exchange. Works with anything that speaks OpenID Connect, and with Supabase's third-party auth.
+      </Feature>
+      <Feature title="Yours">
+        <svg slot="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 4.5v9L12 21l-9-4.5v-9z"/><path d="M12 12l9-4.5M12 12v9M12 12L3 7.5"/></svg>
+        Each product keeps its own brand and its own door — logo, backdrop, templates, even the sign-in hostname. Latchkey just cuts the keys.
+      </Feature>
+      <Feature title="Enterprise SSO">
+        <svg slot="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg>
+        Your customers bring their own IdP: verified domains route sign-ins to their Okta or Entra, groups map to access, head office covers every location.
+      </Feature>
+      <Feature title="Tenants, teams and roles">
+        <svg slot="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17" cy="9" r="2.5"/><path d="M15.5 20a5 5 0 0 1 6-4.6"/></svg>
+        Model your product's own multi-tenancy — tenants under optional enterprises, teams that confer access, your own role vocabulary in every token.
+      </Feature>
+      <Feature title="Keys and webhooks">
+        <svg slot="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9M17 6l2 2M14 9l2 2"/></svg>
+        Show-once API keys for your customers' machines, publishable keys for their browsers, and signed webhooks that keep your database in step with every membership change.
+      </Feature>
+    </Features>
+  </Section>
+
+  <Section eyebrow="How it goes" title="Three steps to a signed-in user." spacing="tight">
+    <Steps>
+      <Step n={1} title="Register a client">One line of Terraform or a form in the console: name, redirect URIs, public or confidential.</Step>
+      <Step n={2} title="Send them to the door">Authorization code + PKCE from your SPA, mobile app or server. Latchkey emails the link, checks the code, or asks for the passkey.</Step>
+      <Step n={3} title="Read the token">RS256 JWTs with your tenants and roles in the <code class="font-mono text-foreground">ns</code> claim. Verify against the JWKS; keep no session state you did not want.</Step>
+    </Steps>
+  </Section>
+
+  <Section eyebrow="In practice" title="Built to run a product, not a demo.">
+    <Bento>
+      <BentoCell span={4} rows={2} eyebrow="The console" title="Every org runs itself.">
+        Clients, users, members, sessions, mail, branding and auth domains — org owners do all of it without a ticket to staff.
+        <Window slot="visual" title="console.latchkey.id/o/grapevine/clients">
+          <div class="grid grid-cols-[10rem_1fr] text-sm">
+            <div class="border-r border-border-soft bg-muted/40 p-3 text-xs text-muted-foreground"><p class="eyebrow mb-2">Org</p><p class="text-foreground">Clients</p><p>Users</p><p>Members</p><p>Sessions</p><p>Settings</p></div>
+            <div class="p-3"><table class="w-full text-xs"><thead><tr class="text-muted-foreground"><th class="pb-2 text-left font-normal">Name</th><th class="pb-2 text-left font-normal">Kind</th><th class="pb-2 text-left font-normal">Last used</th></tr></thead><tbody class="[&_td]:py-1.5 [&_tr]:border-t [&_tr]:border-border-soft"><tr><td>grapevine-portal</td><td>public · PKCE</td><td>2m ago</td></tr><tr><td>grapevine-mobile</td><td>public · phone</td><td>9m ago</td></tr><tr><td>grapevine-backend</td><td>confidential</td><td>just now</td></tr></tbody></table></div>
+          </div>
+        </Window>
+      </BentoCell>
+      <BentoCell span={2} eyebrow="Audit" title="Who signed in, from where.">Login audit with geo enrichment, new-country and impossible-travel flags, refused attempts by the hour.</BentoCell>
+      <BentoCell span={2} eyebrow="Mail" title="Your sender, your templates.">Per-org SendGrid, login and invite templates with a strict variable allowlist, delivery visibility down to the bounce.</BentoCell>
+      <BentoCell span={3} eyebrow="Infra as code" title="A Terraform provider.">Orgs, clients, auth domains, branding and templates as code — the same way the rest of your stack is.</BentoCell>
+      <BentoCell span={3} eyebrow="Trust" title="Open, and run in Australia.">RS256 with key rotation, sealed secrets under Cloud KMS, an event log for everything. Read the source.</BentoCell>
+    </Bento>
+  </Section>
+
+  <Section spacing="tight">
+    <Stats>
+      <Stat value="0" label="passwords stored" />
+      <Stat value="< 300 ms" label="token endpoint, p95" />
+      <Stat value="1" label="binary to run it yourself" />
+      <Stat value="OIDC" label="and nothing proprietary" />
+    </Stats>
+  </Section>
+
+  <Section eyebrow="Questions" title="The ones we get asked." spacing="tight">
+    <Faq>
+      <FaqItem q="Do my users need an account with Latchkey?" open>No. An identity is an email (or a phone number) the first time it signs in through your client. There is nothing for them to create or remember.</FaqItem>
+      <FaqItem q="Can I keep my own database of users?">Yes — Latchkey vouches for who someone is; what they may do is yours. Signed webhooks keep your tables in step with memberships, and token exchange lets your backend mint tokens other systems trust.</FaqItem>
+      <FaqItem q="What does it cost?">Nothing while it is our own infrastructure. If you want to run one, it is one Go binary and a Postgres; the console is a static site.</FaqItem>
+    </Faq>
+  </Section>
+
+  <Cta title="Let *yourself* in." lede="Register a client, send your first user to the door, read the token. Ten minutes." primary={{ label: "Open the console", href: "https://console.latchkey.id" }} secondary={{ label: "Quickstart", href: "/docs/quickstart" }} />
+  <ThemeSwitcher />
+</Site>

@@ -1,0 +1,4 @@
+@import "tailwindcss";
+@import "@latchkey/www/theme/base.css";
+@import "@latchkey/www/theme/latchkey.css"; /* the product's accent: one line to change */
+@source "../../node_modules/@latchkey/www/src";

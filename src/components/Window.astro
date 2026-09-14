@@ -1,0 +1,12 @@
+---
+/** A frame for the product: hairline chrome, a title, the console's window shadow. Put a screenshot or a live component inside. */
+interface Props { title?: string; class?: string }
+const { title, class: cls = "" } = Astro.props;
+---
+<div class:list={["overflow-hidden rounded-xl border bg-card shadow-window", cls]}>
+  <div class="flex h-9 items-center gap-2 border-b border-border-soft bg-muted/60 px-3">
+    <span class="flex gap-1.5" aria-hidden="true"><i class="size-2.5 rounded-full bg-border"></i><i class="size-2.5 rounded-full bg-border"></i><i class="size-2.5 rounded-full bg-border"></i></span>
+    {title && <span class="ml-2 font-mono text-xs text-muted-foreground">{title}</span>}
+  </div>
+  <div><slot /></div>
+</div>

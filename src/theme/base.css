@@ -1,0 +1,465 @@
+/* @latchkey/www — base theme for the product marketing sites.
+ *
+ * The same mauve-tinted neutral and the same per-product accent as the
+ * console shell (@latchkey/shell), so a visitor who clicks "Console"
+ * lands somewhere that looks like where they came from. What differs
+ * is the register: an editorial type scale (Instrument Serif display
+ * over Geist body), a wider rhythm, one ambient glow instead of chrome.
+ *
+ * Import order in the site's stylesheet:
+ *   @import "tailwindcss";
+ *   @import "@latchkey/www/theme/base.css";
+ *   @import "@latchkey/www/theme/<product>.css";
+ *   @source "../node_modules/@latchkey/www/src";
+ *
+ * Theme states: bare :root is light, .dark on <html> is dark. Site.astro
+ * sets the class before first paint from localStorage / prefers-color-scheme.
+ */
+
+@import "./fonts.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ------------------------------------------------------------------------ */
+/* Tailwind theme: fonts, the marketing type scale, radii, colour contract.  */
+/* ------------------------------------------------------------------------ */
+
+@theme inline {
+  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-mono--font-feature-settings: "zero" 1, "liga" 0, "calt" 0;
+  --font-display: var(--display-face);
+
+  /* Reading sizes: 17px body — a site is read, a console is scanned. */
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.25rem;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.5rem;
+  --text-base: 1.0625rem;
+  --text-base--line-height: 1.65;
+  --text-lg: 1.1875rem;
+  --text-lg--line-height: 1.6;
+  --text-xl: 1.375rem;
+  --text-xl--line-height: 1.45;
+  --text-2xl: 1.75rem;
+  --text-2xl--line-height: 1.25;
+  /* Display sizes are fluid: the hero is the biggest thing on the page at
+     every width, and nothing else competes with it. */
+  --text-display-1: clamp(2.75rem, 1.5rem + 5.2vw, 5.25rem);
+  --text-display-1--line-height: 1.02;
+  --text-display-1--letter-spacing: -0.02em;
+  --text-display-2: clamp(2rem, 1.2rem + 3vw, 3.5rem);
+  --text-display-2--line-height: 1.08;
+  --text-display-2--letter-spacing: -0.02em;
+  --text-display-3: clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem);
+  --text-display-3--line-height: 1.15;
+  --text-display-3--letter-spacing: -0.015em;
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1rem;
+  --text-eyebrow--letter-spacing: 0.12em;
+
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+
+  --container-page: 72rem;
+  --container-prose: 42rem;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-2: var(--accent-2);
+  --color-accent-soft: var(--accent-soft);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-border-soft: var(--border-soft);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.05), 0 8px 24px -16px rgb(0 0 0 / 0.25);
+  --shadow-window: 0 1px 2px rgb(0 0 0 / 0.08), 0 32px 64px -24px rgb(0 0 0 / 0.45);
+}
+
+/* ------------------------------------------------------------------------ */
+/* Scale layer: the shell's mauve 1–12, light and dark tuned separately.     */
+/* ------------------------------------------------------------------------ */
+
+:root {
+  color-scheme: light;
+
+  --display-face: "Instrument Serif", ui-serif, Georgia, "Times New Roman", serif;
+
+  --mauve-1: oklch(0.995 0.002 300);
+  --mauve-2: oklch(0.986 0.003 308);
+  --mauve-3: oklch(0.969 0.004 301);
+  --mauve-4: oklch(0.954 0.005 298);
+  --mauve-5: oklch(0.94 0.007 304);
+  --mauve-6: oklch(0.924 0.009 303);
+  --mauve-7: oklch(0.908 0.011 303);
+  --mauve-8: oklch(0.82 0.014 303);
+  --mauve-9: oklch(0.66 0.016 303);
+  --mauve-10: oklch(0.6 0.016 303);
+  --mauve-11: oklch(0.521 0.016 304);
+  --mauve-12: oklch(0.235 0.01 304);
+
+  /* A site sits on the lightest step (the console sits one down): paper,
+     not panel. Cards lift by border, not by a different fill. */
+  --background: var(--mauve-2);
+  --foreground: var(--mauve-12);
+  --card: var(--mauve-1);
+  --card-foreground: var(--mauve-12);
+  --popover: var(--mauve-1);
+  --popover-foreground: var(--mauve-12);
+  --secondary: var(--mauve-4);
+  --secondary-foreground: var(--mauve-12);
+  --muted: var(--mauve-4);
+  --muted-foreground: var(--mauve-11);
+  --accent: var(--mauve-5);
+  --accent-foreground: var(--mauve-12);
+
+  --border: oklch(0.235 0.01 304 / 10%);
+  --border-soft: oklch(0.235 0.01 304 / 6%);
+  --input: oklch(0.235 0.01 304 / 14%);
+
+  --destructive: oklch(0.5 0.182 29.5);
+  --warning: oklch(0.542 0.124 62.5);
+  --success: oklch(0.515 0.11 156.8);
+  --info: oklch(0.546 0.215 262.9);
+}
+
+.dark {
+  color-scheme: dark;
+
+  --mauve-1: oklch(0.182 0.011 303);
+  --mauve-2: oklch(0.2 0.008 308);
+  --mauve-3: oklch(0.229 0.014 305);
+  --mauve-4: oklch(0.263 0.015 302);
+  --mauve-5: oklch(0.28 0.016 302);
+  --mauve-6: oklch(0.31 0.018 302);
+  --mauve-7: oklch(0.34 0.02 302);
+  --mauve-8: oklch(0.42 0.02 302);
+  --mauve-9: oklch(0.55 0.018 302);
+  --mauve-10: oklch(0.62 0.018 302);
+  --mauve-11: oklch(0.684 0.018 301);
+  --mauve-12: oklch(0.926 0.01 305);
+
+  --background: var(--mauve-1);
+  --foreground: var(--mauve-12);
+  --card: var(--mauve-2);
+  --card-foreground: var(--mauve-12);
+  --popover: var(--mauve-3);
+  --popover-foreground: var(--mauve-12);
+  --secondary: var(--mauve-4);
+  --secondary-foreground: var(--mauve-12);
+  --muted: var(--mauve-4);
+  --muted-foreground: var(--mauve-11);
+  --accent: var(--mauve-5);
+  --accent-foreground: var(--mauve-12);
+
+  --border: oklch(0.93 0.008 300 / 11%);
+  --border-soft: oklch(0.93 0.008 300 / 6%);
+  --input: oklch(0.93 0.008 300 / 16%);
+
+  --destructive: oklch(0.707 0.151 26.9);
+  --warning: oklch(0.756 0.137 75.3);
+  --success: oklch(0.738 0.125 158.1);
+  --info: oklch(0.714 0.143 254.6);
+}
+
+/* Accent defaults in a layer so the product's (unlayered) accent file wins
+   whatever the import order. Without one the site is neutral. */
+@layer base {
+  :root {
+    --primary: var(--mauve-12);
+    --primary-foreground: var(--mauve-1);
+    --accent-2: var(--mauve-10);
+    --accent-soft: var(--mauve-5);
+    --ring: var(--mauve-9);
+  }
+  .dark {
+    --primary: var(--mauve-12);
+    --primary-foreground: var(--mauve-1);
+    --accent-2: var(--mauve-10);
+    --accent-soft: var(--mauve-5);
+    --ring: var(--mauve-9);
+  }
+}
+
+/* ------------------------------------------------------------------------ */
+/* Base                                                                       */
+/* ------------------------------------------------------------------------ */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans text-base antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  code,
+  kbd,
+  pre,
+  samp,
+  .font-mono {
+    font-variant-ligatures: none;
+    font-feature-settings: "zero" 1, "liga" 0, "calt" 0;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 22%, transparent);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------------ */
+/* The look: display type, one ambient glow, grain, glass, the CTA gradient.  */
+/* ------------------------------------------------------------------------ */
+
+@utility display-1 {
+  font-family: var(--font-display);
+  font-size: var(--text-display-1);
+  line-height: var(--text-display-1--line-height);
+  letter-spacing: var(--text-display-1--letter-spacing);
+  font-weight: 400;
+  text-wrap: balance;
+}
+@utility display-2 {
+  font-family: var(--font-display);
+  font-size: var(--text-display-2);
+  line-height: var(--text-display-2--line-height);
+  letter-spacing: var(--text-display-2--letter-spacing);
+  font-weight: 400;
+  text-wrap: balance;
+}
+@utility display-3 {
+  font-family: var(--font-display);
+  font-size: var(--text-display-3);
+  line-height: var(--text-display-3--line-height);
+  letter-spacing: var(--text-display-3--letter-spacing);
+  font-weight: 400;
+  text-wrap: balance;
+}
+/* The one italic word in a headline, in the product colour. */
+@utility display-accent {
+  font-style: italic;
+  color: var(--primary);
+}
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-eyebrow);
+  line-height: var(--text-eyebrow--line-height);
+  letter-spacing: var(--text-eyebrow--letter-spacing);
+  text-transform: uppercase;
+  color: var(--primary);
+}
+@utility gradient-text {
+  background-image: linear-gradient(135deg, var(--primary), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@utility bg-accent-gradient {
+  background-image: linear-gradient(135deg, var(--primary), var(--accent-2));
+}
+/* Ambient light, not a blob: one wide, soft radial in the product colour,
+   sitting behind the hero and fading out by the first section. */
+@utility glow {
+  position: relative;
+  isolation: isolate;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -20% -10% auto -10%;
+    height: 80%;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(60% 55% at 30% 20%, color-mix(in oklab, var(--primary) 18%, transparent), transparent 70%),
+      radial-gradient(45% 45% at 75% 10%, color-mix(in oklab, var(--accent-2) 14%, transparent), transparent 70%);
+    filter: blur(24px);
+  }
+}
+.dark .glow::before {
+  background:
+    radial-gradient(60% 55% at 30% 20%, color-mix(in oklab, var(--primary) 24%, transparent), transparent 70%),
+    radial-gradient(45% 45% at 75% 10%, color-mix(in oklab, var(--accent-2) 16%, transparent), transparent 70%);
+}
+/* Film grain over the glow so it reads as light on paper, not a PNG. */
+@utility grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.35;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+}
+.dark .grain::after {
+  mix-blend-mode: screen;
+  opacity: 0.18;
+}
+@utility glass {
+  background: color-mix(in srgb, var(--background) 72%, transparent);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  backdrop-filter: blur(12px) saturate(1.4);
+}
+/* Hairline rule with a soft accent centre, for section breaks. */
+@utility rule-accent {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--primary) 45%, var(--border)), transparent);
+}
+/* Reveal on scroll: Site.astro flips data-shown; motion respects the OS. */
+@utility reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  &[data-shown] {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@layer components {
+  /* The primary button: the console's dressed gradient with the inset
+     top highlight, so the CTA is the same object as the console's. */
+  .btn {
+    @apply inline-flex h-11 items-center justify-center gap-2 rounded-md px-5 text-sm font-medium whitespace-nowrap transition-[filter,background-color,border-color] select-none;
+    @apply focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none;
+  }
+  .btn-primary {
+    color: var(--primary-foreground);
+    background-image: linear-gradient(135deg, var(--primary), var(--accent-2));
+    box-shadow:
+      0 1px 2px rgb(0 0 0 / 0.2),
+      inset 0 1px 0 rgb(255 255 255 / 0.2);
+  }
+  .btn-primary:hover {
+    filter: brightness(1.06);
+  }
+  .btn-outline {
+    @apply border border-input bg-card text-foreground hover:bg-accent;
+  }
+  .btn-ghost {
+    @apply text-foreground hover:bg-accent;
+  }
+  .btn-sm {
+    @apply h-9 px-3.5 text-xs;
+  }
+  .btn-lg {
+    @apply h-12 px-6 text-base;
+  }
+
+  /* Long-form copy (docs, changelog, legal) on the tokens. */
+  .prose {
+    @apply text-base text-foreground;
+    max-width: var(--container-prose);
+  }
+  .prose > * + * {
+    margin-top: 1.1em;
+  }
+  .prose h1 {
+    @apply display-2 mb-2;
+  }
+  .prose h2 {
+    @apply display-3 mt-12 mb-3;
+  }
+  .prose h3 {
+    @apply text-xl font-medium tracking-tight mt-8 mb-2;
+  }
+  .prose h4 {
+    @apply text-lg font-medium mt-6 mb-1;
+  }
+  .prose p,
+  .prose li {
+    @apply text-muted-foreground;
+  }
+  .prose strong {
+    @apply text-foreground font-medium;
+  }
+  .prose a {
+    @apply text-foreground underline decoration-primary/50 underline-offset-4 hover:decoration-primary;
+  }
+  .prose ul {
+    @apply list-disc pl-6;
+  }
+  .prose ol {
+    @apply list-decimal pl-6;
+  }
+  .prose li + li {
+    margin-top: 0.35em;
+  }
+  .prose code {
+    @apply rounded-xs border bg-muted px-1.5 py-0.5 font-mono text-[0.9em] text-foreground;
+  }
+  .prose pre {
+    @apply my-6 overflow-x-auto rounded-lg border bg-card p-4 text-sm leading-relaxed;
+  }
+  .prose pre code {
+    @apply border-0 bg-transparent p-0 text-inherit;
+  }
+  .prose blockquote {
+    @apply border-l-2 border-primary/60 pl-5 text-foreground;
+    font-family: var(--font-display);
+    font-size: 1.35em;
+    line-height: 1.3;
+  }
+  .prose hr {
+    @apply rule-accent my-12;
+  }
+  .prose table {
+    @apply w-full border-collapse text-sm;
+  }
+  .prose th {
+    @apply eyebrow text-muted-foreground border-b py-2 text-left;
+  }
+  .prose td {
+    @apply border-b border-border-soft py-2 pr-4 align-top text-muted-foreground;
+  }
+  .prose img {
+    @apply rounded-lg border;
+  }
+}

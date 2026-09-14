@@ -1,0 +1,17 @@
+/* runsheet accent: teal. Import after base.css.
+   Source: the console shell's accent, verbatim (chippy ships under it). */
+
+:root {
+  --primary: oklch(0.649 0.114 182); /* #10A594 */
+  --primary-foreground: oklch(0.99 0.005 182);
+  --accent-2: oklch(0.68 0.154 154.3); /* #2FB36B */
+  --accent-soft: oklch(0.953 0.023 180); /* #E0F5F0 */
+  --ring: var(--primary);
+}
+
+.dark {
+  --primary: oklch(0.733 0.127 169.1); /* #3FC29B */
+  --primary-foreground: oklch(0.15 0.03 169.1);
+  --accent-2: oklch(0.774 0.145 154); /* #5FD08A */
+  --accent-soft: oklch(0.319 0.045 174.6); /* #163A31 */
+}
