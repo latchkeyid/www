@@ -18,7 +18,8 @@ every product's accent on the same page is in `docs/screenshots/`.
 
 ## Rolling it out
 
-`docs/adopt/` is the handover: `COMMON.md` (the rules for any site),
+`docs/adopt/` is the handover — start at `HANDOVER.md` (the rule, the
+status of every product, what was learned, the order). Then `COMMON.md` (the rules for any site),
 `ROLLOUT.md` (order and status — latchkey, then foghorn, purser,
 wardroom, tripline, runsheet, Project Mesh, thirtysixzero), and one brief per site with what differs.
 
