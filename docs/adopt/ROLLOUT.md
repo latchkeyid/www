@@ -20,7 +20,7 @@ optrader keep their own sites and are not in `house.ts`.
 | 3 | purser | none | `purserid/purser/www` | shell's | shipped 2026-09-15 (0531f2d, live at purser.id) |
 | 4 | wardroom | none | `wardroomid/wardroom/www` | shell's | shipped 2026-09-15 (4cb68de, live at wardroom.id) |
 | 5 | tripline | none; apex parked at Namecheap | `triplineid/tripline/www` | shell's | ready — `TRIPLINE.md` |
-| 6 | runsheet | Astro on Cloudflare, slate/indigo hand-rolled, in `runsheet/website` | `runsheet/website` (swap the layout) | shell's | ready — `RUNSHEET.md` |
+| 6 | runsheet | Astro on Cloudflare, slate/indigo hand-rolled, in `runsheet/website` | `runsheet/website` (swap the layout) | shell's | built 2026-09-16 (76b5222 on `www`, unpushed); the apex is still the Worker `website` — cut-over steps in HANDOVER.md |
 | 7 | Project Mesh | raw HTML + Tailwind CDN on the `mesh-marketing` Pages project, dark blue/cyan | `projectmesh-io/mesh-marketing` (replace contents) | from the site's variables | shipped 2026-09-15 (33afa67, live at projectmesh.io) |
 | 8 | thirtysixzero | none — the Next.js app on Vercel is at the apex | `thirtysixzero/thirtysixzero/www` | provisional (steel) — confirm | built 2026-09-15 (09f5839, on thirtysixzero-www.pages.dev); apex flip waits on the Vercel/Supabase steps — see HANDOVER.md |
 

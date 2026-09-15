@@ -1,6 +1,6 @@
 # Handover — every product the shape of latchkey
 
-*2026-09-15. Read this first; then `PLATFORM.md` (the rule and the
+*2026-09-15, revised 2026-09-16 (runsheet built). Read this first; then `PLATFORM.md` (the rule and the
 audit), `COMMON.md` (how a site is built), `ROLLOUT.md` (status) and
 the brief for the product you are working on.*
 
@@ -36,7 +36,7 @@ runtime. Out of scope by decision: grapevine, inflow, Pay N Tally,
 | Project Mesh | `mesh-api` plain Go, not loom | `mesh-portal` on Pages ✓ | **live** projectmesh.io on the shell | rewrite mesh-api as loom (own ADR); mesh-portal onto `@latchkey/shell` |
 | thirtysixzero | Next.js + Supabase on Vercel | same app | built, on `thirtysixzero-www.pages.dev`; apex still Vercel | **Chris**: add `app.thirtysixzero.io` to the Vercel project, drop apex/www there, update Supabase site + redirect URLs → then `site_enabled = true` in its `infra/cloudflare` and delete the old Vercel A/`www` records. Later: the full loom + shell rewrite (own ADR) |
 | tripline | loom ✓ | **embedded in the binary** ✗ | none | console → Pages first (`PLATFORM.md`, the three scaffolds are the reference), then the site (`TRIPLINE.md`) |
-| runsheet | Supabase → loom (ADR-001 in progress) | Workers + supabase-js → gateway client (ADR-001) | Astro Worker with an SSR contact form | site: layout swap (`RUNSHEET.md`); decide the contact form — keep as a Worker (the one Cloudflare-but-not-Pages case) or `mailto:` and go static; a first attempt was reset, nothing to salvage |
+| runsheet | Supabase → loom (ADR-001 in progress) | Workers + supabase-js → gateway client (ADR-001) | **built** 2026-09-16 on the shell, static, `mailto:` contact (`runsheet/website@76b5222` on `www`, unpushed) | **Chris**: push `www` in `runsheet/website` and `runsheet/runsheet` (the latter adds `infra/cloudflare/pages.tf`); set `CLOUDFLARE_API_TOKEN` (needs Pages:Edit) + `CLOUDFLARE_ACCOUNT_ID` on `runsheet/website`; apply `infra/cloudflare` with `site_enabled = false` (new var `account_id`); merge → the workflow deploys to `runsheet-www.pages.dev`; then Workers → `website` → Domains & Routes: remove `runsheet.dev` and `www.runsheet.dev`; `site_enabled = true`, apply; delete the Worker |
 
 ## Things learned doing the first six (so you don't relearn them)
 
@@ -62,18 +62,28 @@ runtime. Out of scope by decision: grapevine, inflow, Pay N Tally,
 - **Terraform state** for every `infra/cloudflare` is local on Chris's
   machine (`~/workspace/<org>/<repo>/infra/cloudflare/terraform.tfstate`)
   until each product's GCS bucket exists; treat like a secret.
+- **A Worker custom domain holds its own DNS records**: a Pages domain
+  for the same host cannot be created until the Worker releases it
+  (runsheet's `site_enabled` gate, thirtysixzero's shape). Deploy to
+  `<project>.pages.dev` first, release, then flip.
+- **Contact forms**: runsheet's SendGrid + Turnstile form became
+  `mailto:`; the site is static. If a form is ever wanted again it is a
+  Pages Function in the same project, not a Worker.
+- **Check the copy against the product, not the old site**: runsheet's
+  Prologue page still described the editor-that-opens-PRs model four
+  months after the pull-indexed pivot; "real content stays" means the
+  facts, and the facts had moved.
 - Site copy for an unbuilt product is written in the future-honest tense
   from its DESIGN.md ("designed, being built"), with `cta: null` until
   the console is deployed. Prices only where a product has real ones.
 
 ## Order for the next session
 
-1. runsheet's site (decide the form; then `RUNSHEET.md`).
-2. tripline: console to Pages (a production change — sequence it: API
+1. tripline: console to Pages (a production change — sequence it: API
    with CORS deployed, `api.tripline.id` mapped, console deployed to
    Pages, *then* flip `app.` in DNS), then its site.
-3. thirtysixzero apex flip once Chris has done the Vercel/Supabase steps.
-4. Deploy the three scaffolded consoles (`console.yml` → push-on-main)
+2. thirtysixzero apex flip once Chris has done the Vercel/Supabase steps; runsheet apex flip once Chris has released the Worker's domains (table above).
+3. Deploy the three scaffolded consoles (`console.yml` → push-on-main)
    when their APIs exist.
-5. mesh-portal onto the shell; mesh-api and thirtysixzero as loom
+4. mesh-portal onto the shell; mesh-api and thirtysixzero as loom
    services — each its own ADR on runsheet's ADR-001 shape.
