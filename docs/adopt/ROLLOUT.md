@@ -15,10 +15,10 @@ optrader keep their own sites and are not in `house.ts`.
 
 | # | Product | Site today | Where the new site lives | Accent | Status |
 | --- | --- | --- | --- | --- | --- |
-| 1 | latchkey | one hand-written HTML file + 2 docs pages, brass, in `latchkeyid/ui/www` | `latchkeyid/ui/www` (replace contents) | shell's, verbatim | PR open — latchkeyid/ui#46 (2026-09-15) |
-| 2 | foghorn | none; zone in Cloudflare, apex unmapped | `foghornid/foghorn/www` | shell's | ready — `FOGHORN.md`; Pages projects applied 2026-09-15 |
-| 3 | purser | none | `purserid/purser/www` | shell's | ready — `PURSER.md`; Pages projects applied 2026-09-15 |
-| 4 | wardroom | none | `wardroomid/wardroom/www` | shell's | ready — `WARDROOM.md`; Pages projects applied 2026-09-15 |
+| 1 | latchkey | one hand-written HTML file + 2 docs pages, brass, in `latchkeyid/ui/www` | `latchkeyid/ui/www` (replace contents) | shell's, verbatim | shipped 2026-09-15 (ui#46, live at latchkey.id) |
+| 2 | foghorn | none; zone in Cloudflare, apex unmapped | `foghornid/foghorn/www` | shell's | shipped 2026-09-15 (e2d0090, live at foghorn.id) |
+| 3 | purser | none | `purserid/purser/www` | shell's | shipped 2026-09-15 (0531f2d, live at purser.id) |
+| 4 | wardroom | none | `wardroomid/wardroom/www` | shell's | shipped 2026-09-15 (4cb68de, live at wardroom.id) |
 | 5 | tripline | none; apex parked at Namecheap | `triplineid/tripline/www` | shell's | ready — `TRIPLINE.md` |
 | 6 | runsheet | Astro on Cloudflare, slate/indigo hand-rolled, in `runsheet/website` | `runsheet/website` (swap the layout) | shell's | ready — `RUNSHEET.md` |
 | 7 | Project Mesh | raw HTML + Tailwind CDN on the `mesh-marketing` Pages project, dark blue/cyan | `projectmesh-io/mesh-marketing` (replace contents) | from the site's variables | ready — `PROJECTMESH.md` |
