@@ -56,9 +56,12 @@ runtime. Out of scope by decision: grapevine, inflow, Pay N Tally,
   `wrangler pages deploy`; the apex cert can take a minute after.
 - **The Cloudflare token** (Zone/DNS/Pages edit) is a repo secret on
   wardroomid, purserid, foghornid, thirtysixzero and mesh-marketing (the
-  latter had its own). It was pasted into a chat once — rotate it, then
-  `gh secret set CLOUDFLARE_API_TOKEN` on each of those repos and export
-  `TF_VAR_cloudflare_api_token` for applies. Never write it to a file.
+  latter had its own). It was pasted into a chat once — rotate it. The
+  rotation is now Terraform: `Serient/estate` (`deploy-tokens/`) mints
+  one account-owned token per product and writes it into each deploying
+  repo's secrets; one apply with the bootstrap token replaces all of them.
+  Applies of a product's `infra/cloudflare` still use `TF_VAR_cloudflare_api_token`.
+  Never write a token to a file.
 - **Terraform state** for every `infra/cloudflare` is local on Chris's
   machine (`~/workspace/<org>/<repo>/infra/cloudflare/terraform.tfstate`)
   until each product's GCS bucket exists; treat like a secret.
