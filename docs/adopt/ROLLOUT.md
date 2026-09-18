@@ -11,7 +11,8 @@ whose `infra/cloudflare` stacks are already in Terraform; then the
 products with sites that work today.
 
 **Not part of this**: grapevine, inflow, Pay N Tally, 1099-W9 and
-optrader keep their own sites and are not in `house.ts`.
+optrader keep their own sites and are not in `house.ts`. thirtysixzero
+was retired on 2026-09-18 (row 8).
 
 | # | Product | Site today | Where the new site lives | Accent | Status |
 | --- | --- | --- | --- | --- | --- |
@@ -22,7 +23,7 @@ optrader keep their own sites and are not in `house.ts`.
 | 5 | tripline | none; the zone was already on Cloudflare with Namecheap parking records at the apex and www | `triplineid/tripline/www` | shell's | shipped 2026-09-18 (tripline#2, live at tripline.id) |
 | 6 | runsheet | Astro on Cloudflare, slate/indigo hand-rolled, in `runsheet/website` | `runsheet/website` (swap the layout) | shell's | shipped 2026-09-18 (76b5222 + 5c7d491, live at runsheet.dev; the Worker `website` is deleted) |
 | 7 | Project Mesh | raw HTML + Tailwind CDN on the `mesh-marketing` Pages project, dark blue/cyan | `projectmesh-io/mesh-marketing` (replace contents) | from the site's variables | shipped 2026-09-15 (33afa67, live at projectmesh.io) |
-| 8 | thirtysixzero | none — the Next.js app on Vercel is at the apex | `thirtysixzero/thirtysixzero/www` | provisional (steel) — confirm | shipped 2026-09-18 (live at thirtysixzero.io; the app moved to app.thirtysixzero.io on Vercel) |
+| 8 | thirtysixzero | — | — | — | **retired 2026-09-18**: a four-day spike from June with one user; Supabase, Vercel, the Pages site, the estate token and the ring entry are gone; the repo is archived; thirtysixzero.io is parked for a later use (the likely one: the outward brand for purser + wardroom + foghorn) |
 
 Status moves to "shipped <date> <sha>" when the PR merges and the Pages
 deploy is live; note the live URL.

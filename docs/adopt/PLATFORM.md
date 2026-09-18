@@ -13,7 +13,7 @@ Supabase, no second backend runtime. Anything that does not fit changes.
 | runsheet | Supabase → loom (ADR-001, in progress) | Cloudflare Workers with supabase-js → becomes a gateway client (ADR-001) | Astro on Cloudflare | not yet | finish ADR-001; the site is a layout swap (`RUNSHEET.md`) |
 | wardroom, purser, foghorn | loom on Cloud Run (scaffolded) | Pages (`<name>-console`, scaffolded 2026-09-15) | Pages (`<name>-www`, Terraform in place) | yes | build the products; sites per their briefs |
 | Project Mesh | `mesh-api` is plain Go (jwkset, websocket) on its own Dockerfile — not loom | `mesh-portal` is Vite on Pages | Pages (`mesh-marketing`) | half | rewrite `mesh-api` as a loom service on Cloud Run behind Latchkey (its own ADR, the runsheet shape); the site (`PROJECTMESH.md`) can go first |
-| thirtysixzero | Next.js 16 + Supabase + Drizzle on Vercel | the same Next.js app | none | no | the full move: a loom service (`thirtysixzero` binary; CI types, items, plugins, connections as aggregates; plugin fetches as effects), a console on the shell as a Pages site, Latchkey for identity, Supabase and Vercel retired. Its own ADR-001. The site (`THIRTYSIXZERO.md`) can go first and take the apex, since the app will move anyway |
+| thirtysixzero | retired 2026-09-18 | — | — | — | nothing; the domain is parked |
 
 Out of scope by decision (2026-09-15): grapevine, inflow, Pay N Tally,
 1099-W9, optrader.

@@ -1,3 +1,14 @@
+# thirtysixzero — retired 2026-09-18
+
+The product was a four-day spike in June 2026 with one user. On 2026-09-18
+its Supabase project, Vercel project, Pages site, DNS, estate deploy token
+and ring entry were removed, no backup by decision, and the repo was
+archived. `thirtysixzero.io` stays registered and parked; the candidate use
+is the outward brand for the customer-tooling suite (purser, wardroom,
+foghorn) if it is ever sold. The brief below is history.
+
+---
+
 # Adopt in thirtysixzero's www
 
 Repo: `thirtysixzero/thirtysixzero` — the product itself, a Next.js 16

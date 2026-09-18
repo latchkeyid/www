@@ -1,6 +1,6 @@
 # Handover — every product the shape of latchkey
 
-*2026-09-15, revised 2026-09-18 (every site on the shell is live on Pages; deploy tokens in Serient/estate). Read this first; then `PLATFORM.md` (the rule and the
+*2026-09-15, revised 2026-09-18 (every site on the shell is live on Pages; thirtysixzero retired; deploy tokens in Serient/estate). Read this first; then `PLATFORM.md` (the rule and the
 audit), `COMMON.md` (how a site is built), `ROLLOUT.md` (status) and
 the brief for the product you are working on.*
 
@@ -23,7 +23,7 @@ Every product is latchkey's shape, exactly:
 
 Nothing else: no Vercel, no Supabase, no Next.js, no second backend
 runtime. Out of scope by decision: grapevine, inflow, Pay N Tally,
-1099-W9, optrader.
+1099-W9, optrader. Retired: thirtysixzero (2026-09-18).
 
 ## Status, 2026-09-15
 
@@ -34,7 +34,7 @@ runtime. Out of scope by decision: grapevine, inflow, Pay N Tally,
 | purser | same | same | **live** purser.id | same |
 | foghorn | same | same | **live** foghorn.id | same |
 | Project Mesh | `mesh-api` plain Go, not loom | `mesh-portal` on Pages ✓ | **live** projectmesh.io on the shell | rewrite mesh-api as loom (own ADR); mesh-portal onto `@latchkey/shell` |
-| thirtysixzero | Next.js + Supabase on Vercel, at **app.thirtysixzero.io** since 2026-09-18 | same app | **live** thirtysixzero.io on Pages (2026-09-18) | **Chris**: the GitHub App `thirty-six-zero` (id 4015558) still has its Webhook, Callback and Setup URLs on the old host — set them to `https://app.thirtysixzero.io/api/integrations/github/{webhook,installed,installed}` in GitHub → Settings → Developer settings; no API updates callback URLs. Later: the full loom + shell rewrite (own ADR) |
+| thirtysixzero | **retired 2026-09-18** | — | — | nothing. Services deleted, no backup by decision; repo archived; the domain is parked with only the registrar SPF record in its zone. The GitHub App `thirty-six-zero` still exists under the thirtysixzero org — delete it in the org's settings when convenient; no API does it |
 | tripline | loom ✓ | **embedded in the binary** ✗ | **live** tripline.id on Pages (2026-09-18) | console → Pages (`PLATFORM.md`), then nothing for the site |
 | runsheet | Supabase → loom (ADR-001 in progress) | Workers + supabase-js → gateway client (ADR-001) | **live** runsheet.dev on Pages (2026-09-18); the Worker `website` is deleted | nothing for the site |
 
