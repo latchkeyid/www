@@ -57,7 +57,7 @@ is `wrangler pages deploy dist`.
   for light and dark. The six console products' files are the shell's,
   verbatim (`npm run sync-accents`).
 - `theme/fonts.css` — Geist Sans and Mono (the console's) and
-  Instrument Serif for display, self-hosted, OFL.
+  Instrument Sans for display (a sans with a true italic), self-hosted, OFL.
 - `layouts/Site.astro` — head (title, description, canonical, OG,
   JSON-LD), the theme class before first paint, `Nav`, `Footer` with the
   house ring, the reveal observer. `layouts/Docs.astro` — the same with a

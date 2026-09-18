@@ -11,8 +11,9 @@ A visitor reads a site and then opens the console. The two must be one
 object seen twice: the **same neutral** (the shell's mauve-tinted scale)
 and the **same accent per product**, but a different register — a site
 is read, a console is scanned. So the site gets an editorial type scale
-(a serif display face over the console's Geist), a wider rhythm, one
-ambient glow, and the product shown working, on the same tokens.
+(a display face set heavier and tighter than the console's Geist body),
+a wider rhythm, one ambient glow, and the product shown working, on the
+same tokens.
 
 ## Stack
 
@@ -35,10 +36,13 @@ Consumed as a git dependency shipping Astro source, like the shell.
   site's brand variables (blue → cyan); thirtysixzero has no brand
   colour on record and its file (steel) is marked PROVISIONAL.
 - **Type**: Geist body at 17px/1.65 (`text-base`), Geist Mono for
-  eyebrows and code, **Instrument Serif** for display — `display-1`
-  (hero, fluid 44–84px, tracking −0.02em), `display-2` (section
-  headings), `display-3` (docs h2s). One italic word in the product
-  colour (`display-accent`) is the only decoration a headline gets.
+  eyebrows and code, **Instrument Sans** for display, semibold —
+  `display-1` (hero, fluid 44–84px, tracking −0.035em), `display-2`
+  (section headings), `display-3` (docs h2s). It replaced Instrument
+  Serif on 2026-09-18: the serif's hairlines read underweight beside
+  Geist, and Instrument Sans is a sans with a true italic, so one italic
+  word in the product colour (`display-accent`) stays the only
+  decoration a headline gets.
   `eyebrow` is mono, 12px, uppercase, tracking 0.12em, in the accent.
   A product may override `--display-face` in its accent file.
 - **Status hues** exist for badges only (`--success`, `--warning`,
@@ -80,8 +84,8 @@ Consumed as a git dependency shipping Astro source, like the shell.
    ghost "Sign in" and a primary "Console".
 7. **The footer ends with the house**: every sibling product with its
    accent dot, so each site points at the others.
-8. **Long-form is `.prose`** — docs, changelog, legal — with serif
-   headings, mono code, accent-underlined links, a serif pull-quote.
+8. **Long-form is `.prose`** — docs, changelog, legal — with display
+   headings, mono code, accent-underlined links, a display pull-quote.
 9. Phone first: one column, 24px gutters, the terminal scrolls inside its
    frame, the nav collapses to a `<details>` menu with no script.
 
@@ -90,4 +94,6 @@ Consumed as a git dependency shipping Astro source, like the shell.
 Bento everywhere; gradient blobs and glassmorphism as decoration; heavy
 scroll-jacking and kinetic type; WebGL/3D heroes; AI-generated imagery;
 stock photography; centred-everything layouts; a second typeface for
-body copy. Each is in the research file with the reason.
+body copy. Each is in the research file with the reason. Instrument
+Serif for display was adopted, shipped on six sites, and replaced (see
+Type above).
