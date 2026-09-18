@@ -1,6 +1,6 @@
 # Handover — every product the shape of latchkey
 
-*2026-09-15, revised 2026-09-18 (runsheet and thirtysixzero live on Pages, tripline built, deploy tokens in Serient/estate). Read this first; then `PLATFORM.md` (the rule and the
+*2026-09-15, revised 2026-09-18 (every site on the shell is live on Pages; deploy tokens in Serient/estate). Read this first; then `PLATFORM.md` (the rule and the
 audit), `COMMON.md` (how a site is built), `ROLLOUT.md` (status) and
 the brief for the product you are working on.*
 
@@ -35,7 +35,7 @@ runtime. Out of scope by decision: grapevine, inflow, Pay N Tally,
 | foghorn | same | same | **live** foghorn.id | same |
 | Project Mesh | `mesh-api` plain Go, not loom | `mesh-portal` on Pages ✓ | **live** projectmesh.io on the shell | rewrite mesh-api as loom (own ADR); mesh-portal onto `@latchkey/shell` |
 | thirtysixzero | Next.js + Supabase on Vercel, at **app.thirtysixzero.io** since 2026-09-18 | same app | **live** thirtysixzero.io on Pages (2026-09-18) | **Chris**: the GitHub App `thirty-six-zero` (id 4015558) still has its Webhook, Callback and Setup URLs on the old host — set them to `https://app.thirtysixzero.io/api/integrations/github/{webhook,installed,installed}` in GitHub → Settings → Developer settings; no API updates callback URLs. Later: the full loom + shell rewrite (own ADR) |
-| tripline | loom ✓ | **embedded in the binary** ✗ | **built** on `www` (PR), live at tripline-www.pages.dev; `tripline.id` + `www.` attached to the Pages project, pending DNS | **Chris**: mint a new estate bootstrap token into the keychain → `Serient/estate` apply (tripline is in `products.tf`) gives the repo its secret and a DNS token; then import/remove the parking apex A + www CNAME and apply `infra/cloudflare` (pages.tf shape, already written); merge the PR. Console → Pages stays a separate change (`PLATFORM.md`) |
+| tripline | loom ✓ | **embedded in the binary** ✗ | **live** tripline.id on Pages (2026-09-18) | console → Pages (`PLATFORM.md`), then nothing for the site |
 | runsheet | Supabase → loom (ADR-001 in progress) | Workers + supabase-js → gateway client (ADR-001) | **live** runsheet.dev on Pages (2026-09-18); the Worker `website` is deleted | nothing for the site |
 
 ## Things learned doing the first six (so you don't relearn them)
@@ -71,10 +71,19 @@ runtime. Out of scope by decision: grapevine, inflow, Pay N Tally,
   created and deployed `tripline-www`, and attached its custom domains,
   with no API token at all. DNS records still need a per-product token
   from `Serient/estate`.
-- **Bootstrap tokens are single-use**: the estate's bootstrap is deleted
-  after each apply (one was pasted into a chat). Adding a product to
-  `products.tf` therefore needs a fresh one, minted into the keychain
-  (`security add-generic-password -s cloudflare-estate-bootstrap`).
+- **The estate bootstrap is dashboard-only and kept**: Cloudflare refuses
+  an API-minted token that can manage tokens ("sub-token is not allowed to
+  have permissions to manage other tokens"), so it cannot renew itself. It
+  lives in the login keychain as `cloudflare-estate-bootstrap`;
+  `Serient/estate/scripts/apply.sh` reads it. Rotate by hand if exposed.
+- **Never apply a stack whose tfvars live on another machine without
+  reading the plan for destroys.** tripline's `infra/cloudflare` had
+  `dns_enabled = true` only in Chris's gitignored tfvars; an apply from a
+  fresh checkout planned the `app.` and `ingest.` records away and a
+  weak grep guard let it through. They were down for about two minutes
+  (2026-09-18 17:18–17:20 AEST) before a second apply recreated them.
+  The default is now `true`; the flag-gated pattern is a trap once the
+  flag has been flipped for good.
 - **The Vercel CLI logs in by device code**, so a session can start
   `vercel login` and hand the URL over; the code lives a few minutes.
   `vercel domains rm <apex>` removes the *account* domain and every
@@ -103,7 +112,6 @@ runtime. Out of scope by decision: grapevine, inflow, Pay N Tally,
 1. tripline: console to Pages (a production change — sequence it: API
    with CORS deployed, `api.tripline.id` mapped, console deployed to
    Pages, *then* flip `app.` in DNS), then its site.
-2. tripline's apex, behind the estate bootstrap token (table above).
 3. Deploy the three scaffolded consoles (`console.yml` → push-on-main)
    when their APIs exist.
 4. mesh-portal onto the shell; mesh-api and thirtysixzero as loom
