@@ -19,8 +19,8 @@ optrader keep their own sites and are not in `house.ts`.
 | 2 | foghorn | none; zone in Cloudflare, apex unmapped | `foghornid/foghorn/www` | shell's | shipped 2026-09-15 (e2d0090, live at foghorn.id) |
 | 3 | purser | none | `purserid/purser/www` | shell's | shipped 2026-09-15 (0531f2d, live at purser.id) |
 | 4 | wardroom | none | `wardroomid/wardroom/www` | shell's | shipped 2026-09-15 (4cb68de, live at wardroom.id) |
-| 5 | tripline | none; apex parked at Namecheap | `triplineid/tripline/www` | shell's | ready — `TRIPLINE.md` |
-| 6 | runsheet | Astro on Cloudflare, slate/indigo hand-rolled, in `runsheet/website` | `runsheet/website` (swap the layout) | shell's | built 2026-09-16 (76b5222 on `www`, unpushed); the apex is still the Worker `website` — cut-over steps in HANDOVER.md |
+| 5 | tripline | none; the zone is on Cloudflare (the "Namecheap parking" note was stale), apex A + www CNAME are parking records | `triplineid/tripline/www` | shell's | built 2026-09-18 (`www` branch, PR open; live at tripline-www.pages.dev, custom domains attached and waiting on DNS) — the apex needs a tripline.id DNS token: `Serient/estate` mints it once a bootstrap token exists |
+| 6 | runsheet | Astro on Cloudflare, slate/indigo hand-rolled, in `runsheet/website` | `runsheet/website` (swap the layout) | shell's | shipped 2026-09-18 (76b5222 + 5c7d491, live at runsheet.dev; the Worker `website` is deleted) |
 | 7 | Project Mesh | raw HTML + Tailwind CDN on the `mesh-marketing` Pages project, dark blue/cyan | `projectmesh-io/mesh-marketing` (replace contents) | from the site's variables | shipped 2026-09-15 (33afa67, live at projectmesh.io) |
 | 8 | thirtysixzero | none — the Next.js app on Vercel is at the apex | `thirtysixzero/thirtysixzero/www` | provisional (steel) — confirm | built 2026-09-15 (09f5839, on thirtysixzero-www.pages.dev); apex flip waits on the Vercel/Supabase steps — see HANDOVER.md |
 

@@ -1,6 +1,6 @@
 # Handover — every product the shape of latchkey
 
-*2026-09-15, revised 2026-09-16 (runsheet built). Read this first; then `PLATFORM.md` (the rule and the
+*2026-09-15, revised 2026-09-18 (runsheet live, tripline built, deploy tokens in Serient/estate). Read this first; then `PLATFORM.md` (the rule and the
 audit), `COMMON.md` (how a site is built), `ROLLOUT.md` (status) and
 the brief for the product you are working on.*
 
@@ -34,9 +34,9 @@ runtime. Out of scope by decision: grapevine, inflow, Pay N Tally,
 | purser | same | same | **live** purser.id | same |
 | foghorn | same | same | **live** foghorn.id | same |
 | Project Mesh | `mesh-api` plain Go, not loom | `mesh-portal` on Pages ✓ | **live** projectmesh.io on the shell | rewrite mesh-api as loom (own ADR); mesh-portal onto `@latchkey/shell` |
-| thirtysixzero | Next.js + Supabase on Vercel | same app | built, on `thirtysixzero-www.pages.dev`; apex still Vercel | **Chris**: add `app.thirtysixzero.io` to the Vercel project, drop apex/www there, update Supabase site + redirect URLs → then `site_enabled = true` in its `infra/cloudflare` and delete the old Vercel A/`www` records. Later: the full loom + shell rewrite (own ADR) |
-| tripline | loom ✓ | **embedded in the binary** ✗ | none | console → Pages first (`PLATFORM.md`, the three scaffolds are the reference), then the site (`TRIPLINE.md`) |
-| runsheet | Supabase → loom (ADR-001 in progress) | Workers + supabase-js → gateway client (ADR-001) | **built** 2026-09-16 on the shell, static, `mailto:` contact (`runsheet/website@76b5222` on `www`, unpushed) | **Chris**: push `www` in `runsheet/website` and `runsheet/runsheet` (the latter adds `infra/cloudflare/pages.tf`); set `CLOUDFLARE_API_TOKEN` (needs Pages:Edit) + `CLOUDFLARE_ACCOUNT_ID` on `runsheet/website`; apply `infra/cloudflare` with `site_enabled = false` (new var `account_id`); merge → the workflow deploys to `runsheet-www.pages.dev`; then Workers → `website` → Domains & Routes: remove `runsheet.dev` and `www.runsheet.dev`; `site_enabled = true`, apply; delete the Worker |
+| thirtysixzero | Next.js + Supabase on Vercel | same app | built, on `thirtysixzero-www.pages.dev`; apex still Vercel | **Chris**: `vercel login` on this machine (no Vercel credential exists here; the Supabase CLI one does and `app.thirtysixzero.io/**` is already on the auth allow list). Then, in one go: add `app.thirtysixzero.io` to the Vercel project, set Supabase `site_url`, delete the Vercel apex A + `www` CNAME, `site_enabled = true`. Later: the full loom + shell rewrite (own ADR) |
+| tripline | loom ✓ | **embedded in the binary** ✗ | **built** on `www` (PR), live at tripline-www.pages.dev; `tripline.id` + `www.` attached to the Pages project, pending DNS | **Chris**: mint a new estate bootstrap token into the keychain → `Serient/estate` apply (tripline is in `products.tf`) gives the repo its secret and a DNS token; then import/remove the parking apex A + www CNAME and apply `infra/cloudflare` (pages.tf shape, already written); merge the PR. Console → Pages stays a separate change (`PLATFORM.md`) |
+| runsheet | Supabase → loom (ADR-001 in progress) | Workers + supabase-js → gateway client (ADR-001) | **live** runsheet.dev on Pages (2026-09-18); the Worker `website` is deleted | nothing for the site |
 
 ## Things learned doing the first six (so you don't relearn them)
 
@@ -65,6 +65,16 @@ runtime. Out of scope by decision: grapevine, inflow, Pay N Tally,
 - **Terraform state** for every `infra/cloudflare` is local on Chris's
   machine (`~/workspace/<org>/<repo>/infra/cloudflare/terraform.tfstate`)
   until each product's GCS bucket exists; treat like a secret.
+- **wrangler on Chris's machine is logged in with account OAuth** (Workers,
+  Pages, zone read — not DNS write): `runsheet/console/node_modules/.bin/wrangler`.
+  It released runsheet.dev from the Worker through the Workers domains API,
+  created and deployed `tripline-www`, and attached its custom domains,
+  with no API token at all. DNS records still need a per-product token
+  from `Serient/estate`.
+- **Bootstrap tokens are single-use**: the estate's bootstrap is deleted
+  after each apply (one was pasted into a chat). Adding a product to
+  `products.tf` therefore needs a fresh one, minted into the keychain
+  (`security add-generic-password -s cloudflare-estate-bootstrap`).
 - **A Worker custom domain holds its own DNS records**: a Pages domain
   for the same host cannot be created until the Worker releases it
   (runsheet's `site_enabled` gate, thirtysixzero's shape). Deploy to
@@ -85,7 +95,7 @@ runtime. Out of scope by decision: grapevine, inflow, Pay N Tally,
 1. tripline: console to Pages (a production change — sequence it: API
    with CORS deployed, `api.tripline.id` mapped, console deployed to
    Pages, *then* flip `app.` in DNS), then its site.
-2. thirtysixzero apex flip once Chris has done the Vercel/Supabase steps; runsheet apex flip once Chris has released the Worker's domains (table above).
+2. tripline's apex and thirtysixzero's apex flips, each behind one credential Chris holds (table above).
 3. Deploy the three scaffolded consoles (`console.yml` → push-on-main)
    when their APIs exist.
 4. mesh-portal onto the shell; mesh-api and thirtysixzero as loom
