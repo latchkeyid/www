@@ -1,6 +1,6 @@
 # Handover — every product the shape of latchkey
 
-*2026-09-15, revised 2026-09-18 (runsheet live, tripline built, deploy tokens in Serient/estate). Read this first; then `PLATFORM.md` (the rule and the
+*2026-09-15, revised 2026-09-18 (runsheet and thirtysixzero live on Pages, tripline built, deploy tokens in Serient/estate). Read this first; then `PLATFORM.md` (the rule and the
 audit), `COMMON.md` (how a site is built), `ROLLOUT.md` (status) and
 the brief for the product you are working on.*
 
@@ -34,7 +34,7 @@ runtime. Out of scope by decision: grapevine, inflow, Pay N Tally,
 | purser | same | same | **live** purser.id | same |
 | foghorn | same | same | **live** foghorn.id | same |
 | Project Mesh | `mesh-api` plain Go, not loom | `mesh-portal` on Pages ✓ | **live** projectmesh.io on the shell | rewrite mesh-api as loom (own ADR); mesh-portal onto `@latchkey/shell` |
-| thirtysixzero | Next.js + Supabase on Vercel | same app | built, on `thirtysixzero-www.pages.dev`; apex still Vercel | **Chris**: `vercel login` on this machine (no Vercel credential exists here; the Supabase CLI one does and `app.thirtysixzero.io/**` is already on the auth allow list). Then, in one go: add `app.thirtysixzero.io` to the Vercel project, set Supabase `site_url`, delete the Vercel apex A + `www` CNAME, `site_enabled = true`. Later: the full loom + shell rewrite (own ADR) |
+| thirtysixzero | Next.js + Supabase on Vercel, at **app.thirtysixzero.io** since 2026-09-18 | same app | **live** thirtysixzero.io on Pages (2026-09-18) | **Chris**: the GitHub App `thirty-six-zero` (id 4015558) still has its Webhook, Callback and Setup URLs on the old host — set them to `https://app.thirtysixzero.io/api/integrations/github/{webhook,installed,installed}` in GitHub → Settings → Developer settings; no API updates callback URLs. Later: the full loom + shell rewrite (own ADR) |
 | tripline | loom ✓ | **embedded in the binary** ✗ | **built** on `www` (PR), live at tripline-www.pages.dev; `tripline.id` + `www.` attached to the Pages project, pending DNS | **Chris**: mint a new estate bootstrap token into the keychain → `Serient/estate` apply (tripline is in `products.tf`) gives the repo its secret and a DNS token; then import/remove the parking apex A + www CNAME and apply `infra/cloudflare` (pages.tf shape, already written); merge the PR. Console → Pages stays a separate change (`PLATFORM.md`) |
 | runsheet | Supabase → loom (ADR-001 in progress) | Workers + supabase-js → gateway client (ADR-001) | **live** runsheet.dev on Pages (2026-09-18); the Worker `website` is deleted | nothing for the site |
 
@@ -75,6 +75,14 @@ runtime. Out of scope by decision: grapevine, inflow, Pay N Tally,
   after each apply (one was pasted into a chat). Adding a product to
   `products.tf` therefore needs a fresh one, minted into the keychain
   (`security add-generic-password -s cloudflare-estate-bootstrap`).
+- **The Vercel CLI logs in by device code**, so a session can start
+  `vercel login` and hand the URL over; the code lives a few minutes.
+  `vercel domains rm <apex>` removes the *account* domain and every
+  subdomain alias with it (app. went dark for a minute) — re-add the
+  subdomain to the project afterwards, or remove only project aliases.
+- **A site inside an app repo also breaks the app's type check**: Next's
+  root `tsconfig` swept `www/src` in and failed on `astro:content` for
+  three days of thirtysixzero deploys. `exclude: ["www"]`.
 - **A Worker custom domain holds its own DNS records**: a Pages domain
   for the same host cannot be created until the Worker releases it
   (runsheet's `site_enabled` gate, thirtysixzero's shape). Deploy to
@@ -95,7 +103,7 @@ runtime. Out of scope by decision: grapevine, inflow, Pay N Tally,
 1. tripline: console to Pages (a production change — sequence it: API
    with CORS deployed, `api.tripline.id` mapped, console deployed to
    Pages, *then* flip `app.` in DNS), then its site.
-2. tripline's apex and thirtysixzero's apex flips, each behind one credential Chris holds (table above).
+2. tripline's apex, behind the estate bootstrap token (table above).
 3. Deploy the three scaffolded consoles (`console.yml` → push-on-main)
    when their APIs exist.
 4. mesh-portal onto the shell; mesh-api and thirtysixzero as loom
