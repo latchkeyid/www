@@ -1,7 +1,7 @@
 {
   "name": "@latchkey/www",
   "version": "0.1.0",
-  "description": "One design and one set of layouts for the product marketing sites: latchkey, tripline, runsheet, wardroom, purser, foghorn, Project Mesh and thirtysixzero.",
+  "description": "One design and one set of layouts for the product marketing sites: latchkey, tripline, runsheet, wardroom, purser, foghorn and Project Mesh.",
   "type": "module",
   "private": false,
   "license": "UNLICENSED",

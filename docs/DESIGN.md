@@ -33,8 +33,7 @@ Consumed as a git dependency shipping Astro source, like the shell.
 - **Accent**: `--primary`, `--primary-foreground`, `--accent-2` (the
   second gradient stop), `--accent-soft`, `--ring`. The six console
   products' files are the shell's, verbatim. Project Mesh's is from its
-  site's brand variables (blue → cyan); thirtysixzero has no brand
-  colour on record and its file (steel) is marked PROVISIONAL.
+  site's brand variables (blue → cyan);
 - **Type**: Geist body at 17px/1.65 (`text-base`), Geist Mono for
   eyebrows and code, **Instrument Sans** for display, semibold —
   `display-1` (hero, fluid 44–84px, tracking −0.035em), `display-2`

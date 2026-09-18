@@ -21,7 +21,6 @@ export const house: Product[] = [
   { id: "wardroom", name: "Wardroom", line: "The team hub: every tool's feed in one place.", url: "https://wardroom.id", accent: "wardroom", console: "https://app.wardroom.id" },
   { id: "purser", name: "Purser", line: "Support, contacts and leads for your products.", url: "https://purser.id", accent: "purser", console: "https://app.purser.id" },
   { id: "foghorn", name: "Foghorn", line: "Campaigns, email and attribution, loud and clear.", url: "https://foghorn.id", accent: "foghorn", console: "https://app.foghorn.id" },
-  { id: "thirtysixzero", name: "thirtysixzero", line: "Configuration items, connected to the tools that run your business.", url: "https://thirtysixzero.io", accent: "thirtysixzero" },
   { id: "projectmesh", name: "Project Mesh", line: "The control plane for your AI agent fleet.", url: "https://projectmesh.io", accent: "projectmesh", console: "https://app.projectmesh.io" },
 ];
 

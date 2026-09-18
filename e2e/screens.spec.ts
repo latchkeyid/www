@@ -2,7 +2,7 @@ import { expect, test, type Page } from "@playwright/test";
 
 // Every product's accent on the same page, light and dark, desktop and
 // phone: the proof that the shell is one design with eight skins.
-const themes = ["latchkey", "tripline", "runsheet", "wardroom", "purser", "foghorn", "projectmesh", "thirtysixzero"] as const;
+const themes = ["latchkey", "tripline", "runsheet", "wardroom", "purser", "foghorn", "projectmesh"] as const;
 
 async function open(page: Page, path: string, theme: string, dark: boolean) {
   await page.emulateMedia({ reducedMotion: "reduce", colorScheme: dark ? "dark" : "light" });
