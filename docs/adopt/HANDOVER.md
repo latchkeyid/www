@@ -1,6 +1,6 @@
 # Handover — every product the shape of latchkey
 
-*2026-09-15, revised 2026-09-18 (every site on the shell is live on Pages; thirtysixzero retired; deploy tokens in Serient/estate). Read this first; then `PLATFORM.md` (the rule and the
+*2026-09-15, revised 2026-09-19 (wardroom slice 1 live on Cloud Run; GCP onboarding and redback day zero are Serient/estate roots). Read this first; then `PLATFORM.md` (the rule and the
 audit), `COMMON.md` (how a site is built), `ROLLOUT.md` (status) and
 the brief for the product you are working on.*
 
@@ -30,7 +30,7 @@ runtime. Out of scope by decision: grapevine, inflow, Pay N Tally,
 | Product | API | Console | Site | Remaining |
 | --- | --- | --- | --- | --- |
 | latchkey | loom ✓ | Pages ✓ | **live** on the shell (ui#46) | nothing |
-| wardroom | scaffolded, not deployed | scaffolded for Pages, not deployed | **live** wardroom.id | build the product; `infra/gcp` + `infra/latchkey` applies; `console.yml` → push-on-main |
+| wardroom | **live** on Cloud Run (`wardroom-prod`, 2026-09-19; slice 1: channels, messages, threads, SSE, hooks); no domain mapping yet | deployed to `wardroom-console.pages.dev`, no `app.` yet | **live** wardroom.id | **Chris**: `gcloud domains verify wardroom.id` (Search Console, interactive) → `google_site_verification` + `domain_mapping_enabled = true` in `infra/gcp`, then `dns_enabled = true` in `infra/cloudflare` (api., hooks., app.); register the `wardroom` org's Terraform client in the Latchkey console → `infra/latchkey` apply → the two client ids into `infra/gcp` vars and the service secret's real version; create the wardroom GitHub App → `WARDROOM_GITHUB_WEBHOOK_SECRET`. Purser and foghorn now have projects (`purserid-prod`, `foghornid-prod`) from `Serient/estate/products` |
 | purser | same | same | **live** purser.id | same |
 | foghorn | same | same | **live** foghorn.id | same |
 | Project Mesh | `mesh-api` plain Go, not loom | `mesh-portal` on Pages ✓ | **live** projectmesh.io on the shell | rewrite mesh-api as loom (own ADR); mesh-portal onto `@latchkey/shell` |
