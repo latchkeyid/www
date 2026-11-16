@@ -11,7 +11,7 @@ that stays.
   `runsheet.css`), replace `src/layouts/Site.astro` with the template's
   thin wrapper + `src/site.ts` (product `runsheet`, links Terrastore /
   Prologue / Getting started / Contact, primary "Console" →
-  `https://console.runsheet.dev`), and rebuild each page on the shell's
+  `https://app.runsheet.dev`), and rebuild each page on the shell's
   components: the home hero (headline "Tooling for teams that ship on
   *GitHub*."), the two product cards → `Features` (2 columns) or a
   `Bento` with the "Live" badge as `Badge tone="success"`, product pages

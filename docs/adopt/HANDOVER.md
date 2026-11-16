@@ -12,8 +12,9 @@ Every product is latchkey's shape, exactly:
   Cloud Run, Latchkey for identity — at `api.<domain>` (plus `hooks.`
   where webhooks arrive; tripline also has `ingest.`).
 - **Console**: `@latchkey/shell`, a Cloudflare Pages site at
-  `app.<domain>` (latchkey's is `console.latchkey.id`; runsheet's
-  `console.runsheet.dev` — existing names stay), calling the API with
+  `app.<domain>` — every product, latchkey (`app.latchkey.id`) and
+  runsheet (`app.runsheet.dev`) included; their old `console.` names
+  are permanent 301s to `app.` — calling the API with
   CORS on the console origin. Never embedded in the binary.
 - **Site**: `@latchkey/www`, a Cloudflare Pages site at the apex and
   `www.`. Static. Deployed by wrangler from a workflow on push to main.

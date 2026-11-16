@@ -8,7 +8,7 @@ export const site = {
     { label: "Docs", href: "/docs/quickstart" },
     { label: "Changelog", href: "/changelog" },
   ],
-  secondary: { label: "Sign in", href: "https://console.latchkey.id" },
+  secondary: { label: "Sign in", href: "https://app.latchkey.id" },
   columns: [
     { title: "Product", links: [{ label: "Features", href: "/#product" }, { label: "Pricing", href: "/pricing" }, { label: "Changelog", href: "/changelog" }] },
     { title: "Developers", links: [{ label: "Quickstart", href: "/docs/quickstart" }, { label: "Auth hooks", href: "/docs/auth-hooks" }, { label: "Discovery", href: "https://auth.latchkey.id/.well-known/openid-configuration" }] },
