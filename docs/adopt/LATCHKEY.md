@@ -34,7 +34,7 @@ on the Cloudflare side.**
   dated entries (session links, passkeys, magic-link hardening;
   attempts dashboard; org API paging) as MDX with the PR numbers.
 - Nav: Product, Docs, Changelog; secondary "Sign in" →
-  `https://console.latchkey.id`; primary "Console" (the default from
+  `https://app.latchkey.id`; primary "Console" (the default from
   `house.ts`). Footer columns: Product (Features, Changelog), Developers
   (Quickstarts, Auth hooks, Discovery, Terraform provider →
   `github.com/latchkeyid/terraform-provider-latchkey`), Company (GitHub,

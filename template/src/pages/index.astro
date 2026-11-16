@@ -25,7 +25,7 @@ import ThemeSwitcher from "../components/ThemeSwitcher.astro";
     eyebrow="Identity, passwordless"
     title="One key, *every* door."
     lede="Latchkey is an OpenID Connect provider without passwords: magic links, phone codes and passkeys, with tenants, teams and roles that speak your product's language."
-    primary={{ label: "Open the console", href: "https://console.latchkey.id" }}
+    primary={{ label: "Open the console", href: "https://app.latchkey.id" }}
     secondary={{ label: "Read the quickstart", href: "/docs/quickstart" }}
   >
     <Terminal
@@ -86,7 +86,7 @@ import ThemeSwitcher from "../components/ThemeSwitcher.astro";
     <Bento>
       <BentoCell span={4} rows={2} eyebrow="The console" title="Every org runs itself.">
         Clients, users, members, sessions, mail, branding and auth domains — org owners do all of it without a ticket to staff.
-        <Window slot="visual" title="console.latchkey.id/o/northcote-cafe/clients">
+        <Window slot="visual" title="app.latchkey.id/o/northcote-cafe/clients">
           <div class="grid grid-cols-[10rem_1fr] text-sm">
             <div class="border-r border-border-soft bg-muted/40 p-3 text-xs text-muted-foreground"><p class="eyebrow mb-2">Org</p><p class="text-foreground">Clients</p><p>Users</p><p>Members</p><p>Sessions</p><p>Settings</p></div>
             <div class="p-3"><table class="w-full text-xs"><thead><tr class="text-muted-foreground"><th class="pb-2 text-left font-normal">Name</th><th class="pb-2 text-left font-normal">Kind</th><th class="pb-2 text-left font-normal">Last used</th></tr></thead><tbody class="[&_td]:py-1.5 [&_tr]:border-t [&_tr]:border-border-soft"><tr><td>cafe-portal</td><td>public · PKCE</td><td>2m ago</td></tr><tr><td>cafe-mobile</td><td>public · phone</td><td>9m ago</td></tr><tr><td>cafe-backend</td><td>confidential</td><td>just now</td></tr></tbody></table></div>
@@ -117,6 +117,6 @@ import ThemeSwitcher from "../components/ThemeSwitcher.astro";
     </Faq>
   </Section>
 
-  <Cta title="Let *yourself* in." lede="Register a client, send your first user to the door, read the token. Ten minutes." primary={{ label: "Open the console", href: "https://console.latchkey.id" }} secondary={{ label: "Quickstart", href: "/docs/quickstart" }} />
+  <Cta title="Let *yourself* in." lede="Register a client, send your first user to the door, read the token. Ten minutes." primary={{ label: "Open the console", href: "https://app.latchkey.id" }} secondary={{ label: "Quickstart", href: "/docs/quickstart" }} />
   <ThemeSwitcher />
 </Site>

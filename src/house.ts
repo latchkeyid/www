@@ -15,9 +15,9 @@ export type Product = {
 };
 
 export const house: Product[] = [
-  { id: "latchkey", name: "Latchkey", line: "Passwordless identity for every product on the ring.", url: "https://latchkey.id", accent: "latchkey", console: "https://console.latchkey.id" },
+  { id: "latchkey", name: "Latchkey", line: "Passwordless identity for every product on the ring.", url: "https://latchkey.id", accent: "latchkey", console: "https://app.latchkey.id" },
   { id: "tripline", name: "Tripline", line: "Errors and performance, Sentry-compatible, in-house.", url: "https://tripline.id", accent: "tripline", console: "https://app.tripline.id" },
-  { id: "runsheet", name: "Runsheet", line: "Infrastructure tooling for teams that ship on GitHub.", url: "https://runsheet.dev", accent: "runsheet", console: "https://console.runsheet.dev" },
+  { id: "runsheet", name: "Runsheet", line: "Infrastructure tooling for teams that ship on GitHub.", url: "https://runsheet.dev", accent: "runsheet", console: "https://app.runsheet.dev" },
   { id: "wardroom", name: "Wardroom", line: "The team hub: every tool's feed in one place.", url: "https://wardroom.id", accent: "wardroom", console: "https://app.wardroom.id" },
   { id: "purser", name: "Purser", line: "Support, contacts and leads for your products.", url: "https://purser.id", accent: "purser", console: "https://app.purser.id" },
   { id: "foghorn", name: "Foghorn", line: "Campaigns, email and attribution, loud and clear.", url: "https://foghorn.id", accent: "foghorn", console: "https://app.foghorn.id" },
